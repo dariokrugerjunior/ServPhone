@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>ServPhone</title>
+</head>
+
+<body>
+    <div class="main">
+        <img src="imgs/logo.png" alt="Logo">
+        <div class="form-login">
+            <h1>Login</h1>
+            <input type="text" id="login" placeholder="Usuario">
+            <input type="password" id="password" placeholder="Senha">
+            <button id="">Entrar</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    .form-login {
+    height: 380px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: darkgray;
+    justify-content: space-evenly;
+}
+
+h1 {
+    color: blue;
+    font-size: 40px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95vw;
+    height: 90vh;
+}
+
+button {
+    max-width: 89%;
+    width: 70%;
+    border: 2px solid black;
+    height: 40px;
+}
+
+body {
+    background-color: white;
+}
+
+input {
+    min-height: 40px;
+    max-width: 80%;
+    font-size: 1.3rem;
+    border: 2px solid rgb(0, 60, 255);
+}
+
+img{
+    max-width: 305px;
+    margin-bottom: 40px;
+}
+@media screen {
+    img {
+        width: 80%;
+    }
+}
+</style>
