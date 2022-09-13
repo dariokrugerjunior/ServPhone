@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Site da ServPhone">
+	<meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
+	<meta name="author" content="Dario Kruger Junior">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Funcionarios</title>
+	<link rel="stylesheet" type="text/css" href="">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="/js/admin/employee/employee.js"></script>
+</head>
+
+<body>
+	<header>
+	</header>
+	<section>
+		<div class="table-view">
+			<div class="sub-menu">
+				<div class="button-menu">
+					<h1>Funcionarios</h1>
+					<a href="/pages/admin/employee/new-employee.html" style="padding-right: 50px; padding-left: 50px;">
+						<button class="navbar-toggler custom-toggler" type="button">
+							<img src="/imgs/add-user.svg" width="30" height="30">
+						</button>
+					</a>
+					<a href="">
+						<button class="navbar-toggler custom-toggler" type="button">
+							<img src="/imgs/export-pdf.svg	" width="30" height="30">
+						</button>
+					</a>
+				</div>
+				<input type="text" id="myInput" placeholder="Pesquisa por nomes">
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Função</th>
+						<th scope="col">Telefone</th>
+						<th scope="col">Ação</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					<tr>
+						<th scope="row">1</th>
+						<td>Dario</td>
+						<td>Tecnico</td>
+						<td>992181693</td>
+						<td>
+							<a href="/index.html">
+								<button class="navbar-toggler custom-toggler" type="button">
+									<img src="/imgs/home.svg" width="30" height="30">
+								</button>
+							</a>
+						</td>
+					</tr>
+                    <tr>
+						<th scope="row">1</th>
+						<td>Dario</td>
+						<td>Tecnico</td>
+						<td>992181693</td>
+						<td>
+							<a href="/index.html">
+								<button class="navbar-toggler custom-toggler" type="button">
+									<img src="/imgs/home.svg" width="30" height="30">
+								</button>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<footer></footer>
+</body>
+
+</html>
+
+<style>
+	.table-view {
+		padding-top: 60px;
+	}
+
+	.sub-menu {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.sub-menu {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			align-items: center;
+		}
+	}
+
+	.button-menu {
+		padding-bottom: 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+</style>
