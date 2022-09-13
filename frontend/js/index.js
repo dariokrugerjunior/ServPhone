@@ -1,5 +1,5 @@
 $(document).ready(function(){   
-	$("header").load("../pages/header.html");
+	$("header").load("/pages/menu/header.html");
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",

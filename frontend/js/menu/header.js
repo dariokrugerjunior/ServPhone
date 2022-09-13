@@ -8,7 +8,7 @@ $(document).ready(function () {
         '<a href="/pages/admin/client.html" type="button" class="btn btn-outline-primary" >Serviços</a>';
     if (role == 0) {
         contentButton +='<a href="/pages/admin/client/client.html" class="btn btn-outline-primary">Cliente</a>' +
-            '<a href="/pages/admin/employee/employee.html" type="button" class="btn btn-outline-primary" >Usuarios</a>';
+            '<a href="/pages/admin/employee/employee.html" type="button" class="btn btn-outline-primary" >Funcionarios</a>';
     }
     document.getElementById("menu-option").innerHTML = contentButton
 });

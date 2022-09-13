@@ -1,4 +1,4 @@
 $(document).ready(function(){   
-	$("header").load("/pages/header.html");
+	$("header").load("/pages/menu/header.html");
 
 });
