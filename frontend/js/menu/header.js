@@ -2,10 +2,10 @@ $(document).ready(function () {
     var role = 0
     //admin
     //tech
-    let contentButton = '<a href="/pages/admin/budget.html" type="button" class="btn btn-outline-primary" >Orçamentos</a>' +
+    let contentButton = '<a href="/pages/budget/budget.html" type="button" class="btn btn-outline-primary" >Orçamentos</a>' +
         '<a href="/pages/admin/client.html" type="button" class="btn btn-outline-primary" >Relatorios</a>' +
-        '<a href="/pages/admin/inventory.html" type="button" class="btn btn-outline-primary" >Estoques</a>' +
-        '<a href="/pages/admin/client.html" type="button" class="btn btn-outline-primary" >Serviços</a>';
+        '<a href="/pages/product/product.html" type="button" class="btn btn-outline-primary" >Produtos</a>' +
+        '<a href="/pages/services/services.html" type="button" class="btn btn-outline-primary" >Serviços</a>';
     if (role == 0) {
         contentButton +='<a href="/pages/admin/client/client.html" class="btn btn-outline-primary">Cliente</a>' +
             '<a href="/pages/admin/employee/employee.html" type="button" class="btn btn-outline-primary" >Funcionarios</a>';
