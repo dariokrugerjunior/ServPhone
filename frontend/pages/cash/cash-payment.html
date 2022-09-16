@@ -7,11 +7,11 @@
     <meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
     <meta name="author" content="Dario Kruger Junior">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caixa</title>
+    <title>Caixa Pagamento</title>
     <link rel="stylesheet" type="text/css" href="">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/services/new-services.js"></script>
+    <script src="/js/cash/cash-payment.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <section>
         <div style="padding-top: 60px;">
             <div class="form-view">
-                <h1 style="padding-bottom: 50px;">Caixa</h1>
+                <h1 style="padding-bottom: 50px;">Caixa Pagamento</h1>
                 <form id="form">
                     <div class="form-group row btn-input">
                         <label for="inputCodBudget" class="col-sm-2 col-form-label">Codigo Orçamento</label>
@@ -60,37 +60,98 @@
                     </div>
                     <div class="complement">
                         <label class="col-sm-2 col-form-label">Produtos</label>
-                        <div class="row g-2">
-                            <div class="col-md complement-input">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="InputCodeProduct" style="height: 50px" disabled>
-                                    <label for="InputCodeProduct">Codigo</label>
-                                </div>
+                        <div class="w-100 p-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cod</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Tela de Iphone 8</td>
+                                        <td>R$ 120,00</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Bateria de Iphone 8</td>
+                                        <td>R$ 60,00</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="complement">
+                        <label class="col-sm-2 col-form-label">Serviços</label>
+                        <div class="w-100 p-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cod</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Quantidades Horas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Troca de Tela</td>
+                                        <td>R$ 30,00</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Troca de Bateria</td>
+                                        <td>R$ 50,00</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="payment">
+                        <label class="col-sm-2 col-form-label">Forma de pagamento</label>
+                        <div class="w-100 p-3">
+                            <div class="btn-group w-100 p-3" role="group" aria-label="Basic radio toggle button group">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnMoney" autocomplete="off"
+                                    checked>
+                                <label class="btn btn-outline-primary" for="btnMoney">Dinheiro</label>
+
+                                <input type="radio" class="btn-check" name="btnradio" id="btnDebit" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnDebit">Debito</label>
+
+                                <input type="radio" class="btn-check" name="btnradio" id="btnCredit" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btnCredit">Crédito</label>
                             </div>
-                            <div class="col-md complement-input">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="InputCodeProduct" style="height: 50px" disabled>
-                                    <label for="InputCodeProduct">Nome</label>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="payment-details">
+                        <label class="col-sm-2 col-form-label">Detalhes</label>
+                        <div class="w-100 p-3" style="display: flex;">
+                            <div class="input-group w-50 p-3">
+                                <span class="input-group-text">Valor</span>
+                                <input type="text" id="value" class="form-control" value="2000" disabled>
                             </div>
-                            <div class="col-md complement-input">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="InputCodeProduct" style="height: 50px" disabled>
-                                    <label for="InputCodeProduct">Quantidade</label>
-                                </div>
+                            <div class="input-group w-50 p-3">
+                                <span class="input-group-text">Desconto</span>
+                                <input type="number" id="discount" class="form-control">
                             </div>
-                            <div class="col-md complement-input">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="InputCodeProduct" style="height: 50px" disabled>
-                                    <label for="InputCodeProduct">Valor</label>
-                                </div>
+                            <div class="input-group w-50 p-3">
+                                <span class="input-group-text">Valor Total</span>
+                                <input type="text" id="valueTotal" class="form-control" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="button-option">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()"
-                            class="btn btn-danger">Limpar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                        <button type='reset' value='Reset' name='reset' class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -118,20 +179,19 @@
 
     div.complement {
         display: flex;
+        flex-wrap: nowrap;
         flex-direction: row;
-
     }
 
-    div.complement-input {
-        padding-right: 30px;
+    div.payment {
+        display: flex;
+        align-items: center;
     }
 
-    div.complement-group {
+    div.payment-details {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-
+        align-items: center;
     }
 
 
@@ -139,5 +199,25 @@
         .form-view {
             border: 30px solid transparent !important;
         }
+
+        div.complement {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        div.payment {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        div.payment-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     }
 </style>
