@@ -7,11 +7,11 @@
     <meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
     <meta name="author" content="Dario Kruger Junior">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Funcionario</title>
+    <title>Editar Funcionario</title>
     <link rel="stylesheet" type="text/css" href="">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/admin/employee/new-employee.js"></script>
+    <script src="/js/admin/employee/edit-employee.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <section>
         <div style="padding-top: 60px;">
             <div class="form-view">
-                <h1 style="padding-bottom: 50px;">Novo Funcionario</h1>
+                <h1 style="padding-bottom: 50px;">Funcionario {Nome do Funcionario}</h1>
                 <form id="form">
                     <div class="form-group row btn-input">
                         <label for="inputName" class="col-sm-2 col-form-label">Nome Completo</label>
@@ -58,25 +58,24 @@
                     <div class="form-group row btn-input">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="email@example.com">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="email@example.com" disabled>
                         </div>
                     </div>
                     <div class="form-group row btn-input">
-                        <label for="inputPassword" class="col-sm-2 control-label form-label">Senha</label>
+                        <label for="selectStatus" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
-                    <div class="form-group row btn-input">
-                        <label for="inputPasswordConfirm" class="col-sm-2 control-label form-label">Confirmar Senha</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPasswordConfirm">
+                            <select class="form-select" id="selectStatus" required>
+                                <option selected="1">Ativado</option>
+                                <option value="2">Desativado</option>    
+                            </select>
                         </div>
                     </div>
                     <div class="button-option">
                         <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()"
-                            class="btn btn-danger">Limpar</button>
+                        <a href="/pages/admin/employee/employee.html">
+                            <button type='button'
+                            class="btn btn-danger">Cancelar</button>
+                        </a>
                     </div>
                 </form>
             </div>
