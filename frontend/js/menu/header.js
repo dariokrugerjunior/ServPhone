@@ -9,7 +9,7 @@ $(document).ready(function () {
     if (role == 0) {
         contentButton +='<a href="/pages/admin/client/client.html" class="btn btn-outline-primary">Cliente</a>' +
             '<a href="/pages/admin/employee/employee.html" type="button" class="btn btn-outline-primary" >Funcionarios</a>' +
-            '<a href="/pages/cash/cash.html" type="button" class="btn btn-outline-primary" >Caixa</a>';
+            '<a href="/pages/admin/cash/cash.html" type="button" class="btn btn-outline-primary" >Caixa</a>';
     }
     document.getElementById("menu-option").innerHTML = contentButton
 });
