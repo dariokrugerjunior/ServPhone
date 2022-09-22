@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Site da ServPhone">
+    <meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
+    <meta name="author" content="Dario Kruger Junior">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Orçamento</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/budget/edit-budget.js"></script>
+</head>
+
+<body>
+    <header>
+    </header>
+    <section>
+        <div style="padding-top: 60px;">
+            <div class="form-view">
+                <h1 style="padding-bottom: 50px;">Orçamento {Cod. Orçamento}</h1>
+                <form id="form">
+                    <div class="details-budget">
+                        <div class="column w-50 p-3">
+                            <label for="inputClient" class="col-sm-2 col-form-label">Cliente</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputClient" disabled>
+                            </div>
+                        </div>
+                        <div class="column w-50 p-3">
+                            <label for="inputModel" class="col-sm-2 col-form-label">Modelo</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputModel" disabled>
+                            </div>
+                        </div>
+                        <div class="column w-50 p-3">
+                            <label for="inputBrand" class="col-sm-2 col-form-label">Marca</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputBrand" disabled>
+                            </div>
+                        </div>
+                        <div class="column w-50 p-3">
+                            <label for="inputPasswordProduct" class="col-sm-2 col-form-label">Senha</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="inputPasswordProduct" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-120 p-3 row">
+                        <label for="inputDefect" class="col-sm-2 col-form-label">Defeito</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputDefect">
+                        </div>
+                    </div>
+                    <div class="w-120 p-3 row">
+                        <label for="inputDescription" class="col-sm-2 col-form-label">Descrição</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <p style="padding-left: 1rem;">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button">
+                                Adicionar Produtos
+                            </a>
+                        </p>
+                        <p style="padding-left: 1rem;">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button">
+                                Adicionar Serviços
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="collapse w-100 p-3" id="collapseExample">
+                        <div class="card card-body card-product-add">
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault01" class="form-label">Codigo</label>
+                                <input type="text" class="form-control" id="validationDefault01">
+                            </div>
+                            <div class="w-50 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Quantidade</label>
+                                <input type="text" class="form-control" id="validationDefault02">
+                            </div>
+
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Ação</label>
+                                <a class="btn btn-primary form-control" role="button" id="validationDefault02">
+                                    Adicionar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse w-100 p-3" id="collapseExample2">
+                        <div class="card card-body card-product-add">
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault01" class="form-label">Codigo</label>
+                                <input type="text" class="form-control" id="validationDefault01">
+                            </div>
+                            <div class="w-50 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Quantidade de Horas</label>
+                                <input type="text" class="form-control" id="validationDefault02">
+                            </div>
+
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Ação</label>
+                                <a class="btn btn-primary form-control" role="button" id="validationDefault02">
+                                    Adicionar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="p-3 row">
+                        <form>
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault01" class="form-label">Codigo</label>
+                                <input type="text" class="form-control" id="validationDefault01" value="Mark" disabled>
+                            </div>
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
+                            </div>
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Valor</label>
+                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
+                            </div>
+                            <div class="w-25 p-3 px-4">
+                                <label for="validationDefault02" class="form-label">Quantidade</label>
+                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- <div class="button-option">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()"
+                            class="btn btn-danger">Limpar</button>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+
+</html>
+
+<style>
+    .details-budget {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .card-product-add {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form-view {
+        border: 70px solid transparent !important;
+    }
+
+    .button-option {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+        .form-view {
+            border: 30px solid transparent !important;
+        }
+    }
+</style>
