@@ -20,7 +20,19 @@
     <section>
         <div style="padding-top: 60px;">
             <div class="form-view">
-                <h1 style="padding-bottom: 50px;">Orçamento {Cod. Orçamento}</h1>
+                <div class="title">
+                    <h1>Orçamento {Cod. Orçamento}</h1>
+                    <a href="">
+                        <button class="navbar-toggler custom-toggler" type="button">
+                            <img src="/imgs/whats-app.svg" width="30" height="30">
+                        </button>
+                    </a>
+                    <div class="form-floating" style="padding-right: 1rem;">
+                        <select class="form-select" id="statusSelect" aria-label="Floating label select example"></select>
+                        <label for="statusSelect">Status do Orçamento</label>
+                      </div>
+                      
+                </div>
                 <form id="form">
                     <div class="details-budget">
                         <div class="column w-50 p-3">
@@ -105,41 +117,75 @@
                             </div>
 
                             <div class="w-25 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="validationDefault02">
+                                <label for="actionProduct" class="form-label">Ação</label>
+                                <a class="btn btn-primary form-control" role="button" id="actionProduct">
                                     Adicionar
                                 </a>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="p-3 row">
-                        <form>
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault01" class="form-label">Codigo</label>
-                                <input type="text" class="form-control" id="validationDefault01" value="Mark" disabled>
-                            </div>
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
-                            </div>
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Valor</label>
-                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
-                            </div>
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Quantidade</label>
-                                <input type="text" class="form-control" id="validationDefault02" value="Otto" disabled>
-                            </div>
-                        </form>
+                    <div class="table-responsive-sm" style="padding-left: 1rem; padding-right: 1rem;">
+                        <h2>Produtos</h2>
+                        <table class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cod</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- <div class="button-option">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()"
+                    <div class="table-responsive-sm" style="padding-left: 1rem; padding-right: 1rem;">
+                        <h2>Serviços</h2>
+                        <table class="table table-bordered border-primary">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cod</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Valor-Hora</th>
+                                    <th scope="col">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="button-option">
+                        <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                        <button type='reset' class="btn btn-primary btn-sm" value='Reset' name='reset' onclick="return resetForm()"
                             class="btn btn-danger">Limpar</button>
-                    </div> -->
+                    </div>
                 </form>
             </div>
         </div>
@@ -170,6 +216,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+    }
+
+    .title {
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
 
