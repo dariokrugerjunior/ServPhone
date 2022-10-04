@@ -17,11 +17,11 @@
 <body>
     <header>
     </header>
-    <section>
+    <section class="container">
         <div class="table-view">
             <div class="sub-menu">
                 <div class="button-menu">
-                    <h1>Orçamentos</h1>
+                    <h1 style="padding-right: 3rem;">Orçamentos</h1>
                     <a href="/pages/budget/new-budget.html" style="padding-right: 50px; padding-left: 50px;">
                         <button class="navbar-toggler custom-toggler" type="button">
                             <img src="/imgs/add-budget.svg" width="30" height="30">
@@ -34,12 +34,12 @@
                     </a>
                 </div>
                 <div class="filter">
-                    <div class="input-group mb-3" style="padding-right: 20px; padding-left: 20px;">
+                    <div class="input-group mb-3 button-input">
                         <input type="text" class="form-control" placeholder="Cliente" aria-label="Cliente"
                             aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Pesquisar</button>
                     </div>
-                    <div  class="input-group mb-3" style="padding-right: 20px; padding-left: 20 px;">
+                    <div  class="input-group mb-3 filter-select">
                         <select class="form-select">
                             <option selected value="1">Todos</option>
                             <option value="2">Em Analise Tecnico</option>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table">
+            <table class="table table-bordered border-dark">
                 <thead>
                     <tr>
                         <th scope="col">Cod</th>
@@ -93,45 +93,47 @@
 
 <style>
     .table-view {
-        padding-top: 60px;
-    }
+		padding-top: 60px;
+	}
 
-    .sub-menu {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    .button-menu {
-        padding-bottom: 10px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+	.sub-menu {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 1rem;
+	}
 
     .filter {
         display: flex;
-        flex-direction: row-reverse;
-        flex-wrap: nowrap;
-        align-items: flex-start;
     }
 
-    @media only screen and (max-width: 600px) {
-        .sub-menu {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-        }
+    .button-menu {
+		padding-bottom: 10px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+    .button-input{
+        padding-right: 2rem;
+    }
+
+	@media only screen and (max-width: 600px) {
+		.sub-menu {
+			display: flex;
+    		flex-direction: column;
+    		justify-content: space-between;
+    		align-items: stretch;
+		}
 
         .filter {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            align-items: flex-start;
-            padding-bottom: 10px;
+            display: block;
         }
 
+        .button-input {
+            padding-right: 0rem;
+        }
     }
 </style>

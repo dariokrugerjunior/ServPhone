@@ -17,7 +17,7 @@
 <body>
 	<header>
 	</header>
-	<section>
+	<section class="container">
 		<div class="table-view">
 			<div class="sub-menu">
 				<div class="button-menu">
@@ -35,7 +35,7 @@
 				</div>
 				<input type="text" id="myInput" placeholder="Pesquisa por nomes">
 			</div>
-			<table class="table">
+			<table class="table table-bordered border-dark">
 				<thead>
 					<tr>
 						<th scope="col">Cod</th>
@@ -86,16 +86,16 @@
 	.sub-menu {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		align-items: center;
 	}
 
 	@media only screen and (max-width: 600px) {
 		.sub-menu {
 			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
-			align-items: center;
+    		flex-direction: column;
+    		align-items: stretch;
+			padding-bottom: 1rem;
 		}
 	}
 
@@ -104,5 +104,6 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		justify-content: space-between;
 	}
 </style>

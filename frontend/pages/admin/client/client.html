@@ -17,7 +17,7 @@
 <body>
 	<header>
 	</header>
-	<section>
+	<section class="container">
 		<div class="table-view">
 			<div class="sub-menu">
 				<div class="button-menu">
@@ -35,13 +35,11 @@
 				</div>
 				<input type="text" id="myInput" placeholder="Pesquisa por nomes">
 			</div>
-			<table class="table">
+			<table class="table table-bordered border-dark">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Nome</th>
-						<th scope="col">CPF/CPNJ</th>
-						<th scope="col">Telefone</th>
 						<th scope="col">Status</th>
 						<th scope="col">Ação</th>
 					</tr>
@@ -50,8 +48,6 @@
 					<tr>
 						<th scope="row">1</th>
 						<td>Dario</td>
-						<td>000.000.000-00</td>
-						<td>992181693</td>
 						<td>Ativo</td>
 						<td>
 							<a href="/pages/admin/client/edit-client.html">
@@ -64,8 +60,6 @@
 					<tr>
 						<th scope="row">2</th>
 						<td>Dario</td>
-						<td>000.000.000-00</td>
-						<td>992181693</td>
 						<td>Ativo</td>
 						<td>
 							<a href="/pages/admin/client/edit-client.html">
@@ -92,16 +86,17 @@
 	.sub-menu {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		align-items: center;
+		padding-bottom: 1rem;
 	}
 
 	@media only screen and (max-width: 600px) {
 		.sub-menu {
 			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
-			align-items: center;
+    		flex-direction: column;
+    		justify-content: space-between;
+    		align-items: stretch;
 		}
 	}
 
@@ -110,5 +105,6 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		justify-content: space-between;
 	}
 </style>

@@ -12,7 +12,7 @@
 
 <body class="p-3 m-0 border-0 bd-example">
   <nav class="navbar bg-light fixed-top">
-    <div class="container-fluid">
+    <div class="container-fluid menu-item">
       <button class="navbar-toggler ml-auto custom-toggler" type="button" data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -46,5 +46,16 @@
     flex-direction: column;
     justify-content: space-around;
   }
+
+  .menu-item {
+    padding: 0rem 8rem; 
+  }
+
+  @media only screen and (max-width: 600px) {
+
+    .menu-item {
+      padding: 0rem 1rem; 
+    }
+	}
 
 </style>

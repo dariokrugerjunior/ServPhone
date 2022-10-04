@@ -22,38 +22,39 @@
             <div class="form-view">
                 <div class="title">
                     <h1>Orçamento {Cod. Orçamento}</h1>
-                    <a href="">
-                        <button class="navbar-toggler custom-toggler" type="button">
-                            <img src="/imgs/whats-app.svg" width="30" height="30">
-                        </button>
-                    </a>
-                    <div class="form-floating" style="padding-right: 1rem;">
-                        <select class="form-select" id="statusSelect" aria-label="Floating label select example"></select>
-                        <label for="statusSelect">Status do Orçamento</label>
-                      </div>
-                      
+                    <div class="options">
+                        <a href="">
+                            <button class="navbar-toggler custom-toggler icon-whats" type="button">
+                                <img src="/imgs/whats-app.svg" width="30" height="30">
+                            </button>
+                        </a>
+                        <div class="form-floating">
+                            <select class="form-select" id="statusSelect" aria-label="Floating label select example"></select>
+                            <label for="statusSelect">Status do Orçamento</label>
+                        </div>
+                    </div>               
                 </div>
                 <form id="form">
                     <div class="details-budget">
-                        <div class="column w-50 p-3">
+                        <div class="column w-auto p-3">
                             <label for="inputClient" class="col-sm-2 col-form-label">Cliente</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inputClient" disabled>
                             </div>
                         </div>
-                        <div class="column w-50 p-3">
+                        <div class="column w-auto p-3">
                             <label for="inputModel" class="col-sm-2 col-form-label">Modelo</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inputModel" disabled>
                             </div>
                         </div>
-                        <div class="column w-50 p-3">
+                        <div class="column w-auto p-3">
                             <label for="inputBrand" class="col-sm-2 col-form-label">Marca</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inputBrand" disabled>
                             </div>
                         </div>
-                        <div class="column w-50 p-3">
+                        <div class="column w-auto p-3">
                             <label for="inputPasswordProduct" class="col-sm-2 col-form-label">Senha</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inputPasswordProduct" disabled>
@@ -72,14 +73,14 @@
                             <textarea class="form-control" id="inputDescription" rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex buttons">
                         <p style="padding-left: 1rem;">
-                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button">
+                            <a class="btn btn-primary button-add" data-bs-toggle="collapse" href="#collapseExample" role="button">
                                 Adicionar Produtos
                             </a>
                         </p>
                         <p style="padding-left: 1rem;">
-                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button">
+                            <a class="btn btn-primary button-add" data-bs-toggle="collapse" href="#collapseExample2" role="button">
                                 Adicionar Serviços
                             </a>
                         </p>
@@ -183,7 +184,7 @@
 
                     <div class="button-option">
                         <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                        <button type='reset' class="btn btn-primary btn-sm" value='Reset' name='reset' onclick="return resetForm()"
+                        <button type='reset' class="btn btn-danger btn-sm" value='Reset' name='reset' onclick="return resetForm()"
                             class="btn btn-danger">Limpar</button>
                     </div>
                 </form>
@@ -226,10 +227,59 @@
         justify-content: space-between;
     }
 
+    .icon-whats {
+        padding-right: 22rem;
+    }
 
-    @media only screen and (max-width: 600px) {
+    .options {
+        display: flex;
+        align-items: center;
+        width: 39rem;
+        max-width: 39rem;
+    }
+
+
+    @media all and (max-width: 900px) {
         .form-view {
             border: 30px solid transparent !important;
         }
+
+        .details-budget {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        .title {
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .icon-whats {
+            padding-right: 0rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 19rem;
+             max-width: 19rem;
+            justify-content: space-between;
+        }
+
+        .button-add{
+            width: 20rem;
+            max-width: 20rem;
+        }
+
+        .buttons {
+            flex-direction: column;
+        }
+
     }
 </style>
