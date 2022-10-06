@@ -86,40 +86,42 @@
                         </p>
                     </div>
 
-                    <div class="collapse w-100 p-3" id="collapseExample">
+                    <div class="collapse w-100 p-3" id="addProductCard">
                         <div class="card card-body card-product-add">
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault01" class="form-label">Codigo</label>
-                                <input type="text" class="form-control" id="validationDefault01">
+                            <h3>Produto</h3>
+                            <div class="w-100 p-3">
+                                <label for="inputCod" class="form-label">Codigo</label>
+                                <input type="text" class="form-control" id="inputCod">
                             </div>
-                            <div class="w-50 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Quantidade</label>
-                                <input type="text" class="form-control" id="validationDefault02">
+                            <div class="w-auto p-3">
+                                <label for="inputAmount" class="form-label">Quantidade</label>
+                                <input type="text" class="form-control" id="inputAmount">
                             </div>
 
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="validationDefault02">
+                            <div class="w-auto p-3">    
+                                <label for="buttonAction" class="form-label">Ação</label>
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction">
                                     Adicionar
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="collapse w-100 p-3" id="collapseExample2">
+                    <div class="collapse w-100 p-3" id="addServiceCard">
                         <div class="card card-body card-product-add">
-                            <div class="w-25 p-3 px-4">
-                                <label for="validationDefault01" class="form-label">Codigo</label>
-                                <input type="text" class="form-control" id="validationDefault01">
+                            <h3>Serviço</h3>
+                            <div class="w-100 p-3">
+                                <label for="inputCod" class="form-label">Codigo</label>
+                                <input type="text" class="form-control" id="inputCod">
                             </div>
-                            <div class="w-50 p-3 px-4">
-                                <label for="validationDefault02" class="form-label">Quantidade de Horas</label>
-                                <input type="text" class="form-control" id="validationDefault02">
+                            <div class="w-auto p-3">
+                                <label for="inputAmountHours" class="form-label">Quantidade de Horas</label>
+                                <input type="text" class="form-control" id="inputAmountHours">
                             </div>
 
-                            <div class="w-25 p-3 px-4">
-                                <label for="actionProduct" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="actionProduct">
+                            <div class="w-auto p-3">   
+                                <label for="buttonAction" class="form-label">Ação</label>
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction">
                                     Adicionar
                                 </a>
                             </div>
@@ -207,6 +209,7 @@
     .card-product-add {
         display: flex;
         flex-direction: row;
+        align-items: center;
     }
 
     .form-view {
@@ -242,6 +245,11 @@
     @media all and (max-width: 900px) {
         .form-view {
             border: 30px solid transparent !important;
+        }
+
+        .card-product-add {
+            flex-direction: column;
+            align-items: stretch;
         }
 
         .details-budget {
