@@ -21,7 +21,7 @@
 <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 <init-param>
     <param-name>jersey.config.server.provider.packages</param-name>
-    <param-value>br.com.helpsmartphone.rest</param-value>
+    <param-value>br.com.servphone.rest</param-value>
 </init-param>
 <init-param>
     <param-name>jersey.config.server.tracing</param-name>
@@ -57,11 +57,11 @@
 
 
 <filter>
-<filter-name>FilterLogin</filter-name>
+<filter-name>ServletFilter</filter-name>
 <filter-class>br.com.servphone.security.FilterLogin</filter-class>
 </filter>
 <filter-mapping>
-<filter-name>FilterLogin</filter-name>
-<url-pattern>/servphone/*</url-pattern>
+<filter-name>ServletFilter</filter-name>
+<url-pattern>/pages/*</url-pattern>
 </filter-mapping>
 </web-app>

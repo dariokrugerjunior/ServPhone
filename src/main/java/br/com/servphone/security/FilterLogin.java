@@ -15,15 +15,16 @@ public class FilterLogin implements Filter {
             HttpSession session = ((HttpServletRequest) servletRequest).getSession();
             String user = null;
             if (session != null){
-                user = (String) session.getAttribute("login");
+                user = (String) session.getAttribute("email");
             }
 
             if (user == null) {
                 session.setAttribute("msg", "Você não está logado no sistema!");
                 session.invalidate();
-                ((HttpServletResponse) servletResponse).sendRedirect("/");
+                ((HttpServletResponse) servletResponse).sendRedirect("/servphone_war_exploded/error.html");
             } else {
                 filterChain.doFilter(servletRequest, servletResponse);
+                ((HttpServletResponse) servletResponse).sendRedirect("/servphone_war_exploded/pages/index.html");
             }
         } catch (Exception ex) {
             ex.printStackTrace();

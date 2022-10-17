@@ -7,9 +7,7 @@ validateLogin = function () {
         url: "security/auth",
         data: {login: login, password: password},
     }).then((response) => {
-        if (response) {
-            window.location.href=`/servphone_war_exploded/pages/index.html`
-        }
+
     }).catch((error) => {
 
            swal.fire({

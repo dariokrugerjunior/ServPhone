@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("email", employeeUser.getEmail());// Vincula um objeto a sessao, no caso o login do usuario está sendo colocado na sessao.
                 session.setAttribute("phone", employeeUser.getPhone());
                 session.setAttribute("role", employeeUser.getRole());
+                response.sendRedirect("/servphone_war_exploded/pages/index.html");
                 out.print("true");
             } else if (employeeUser.getStatus() == 0) {
                 out.write("Usuario desativado pelo administrador");
