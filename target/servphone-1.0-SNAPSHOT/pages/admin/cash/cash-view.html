@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Site da ServPhone">
+    <meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
+    <meta name="author" content="Dario Kruger Junior">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa Detalhes</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/admin/cash/cash-view.js"></script>
+</head>
+
+<body>
+    <header>
+    </header>
+    <section>
+        <div style="padding-top: 60px;">
+            <div class="form-view">
+                <h1 style="padding-bottom: 50px;">Caixa Detalhes</h1>
+                <form id="form">
+                    <div class="form-group row btn-input">
+                        <label for="inputCodBudget" class="col-sm-2 col-form-label">Codigo Orçamento</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCodBudget" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputDiscount" class="col-sm-2 col-form-label">Desconto</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDiscount" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputValue" class="col-sm-2 col-form-label">Valor</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputValue" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputValueTotal" class="col-sm-2 col-form-label">Valor Total</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputValueTotal" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Data</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDate" disabled>
+                        </div>
+                    </div>
+                    <div class="button-option">
+                        <a href="/pages/admin/cash/cash.html">
+                            <button type='button' class="btn btn-danger">Voltar</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+
+</html>
+
+<style>
+    .form-view {
+        border: 70px solid transparent !important;
+    }
+
+    div.btn-input {
+        padding-bottom: 20px;
+    }
+
+    .button-option {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    div.complement {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+
+    div.payment {
+        display: flex;
+        align-items: center;
+    }
+
+    div.payment-details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+        .form-view {
+            border: 30px solid transparent !important;
+        }
+
+        div.complement {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        div.payment {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        div.payment-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+    }
+</style>

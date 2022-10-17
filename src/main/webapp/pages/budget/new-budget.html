@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Site da ServPhone">
+    <meta name="keywords" content="Sistema de Gestão de Manutenção de eletronicos">
+    <meta name="author" content="Dario Kruger Junior">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Orçamento</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/budget/new-budget.js"></script>
+</head>
+
+<body>
+    <header>
+    </header>
+    <section>
+        <div style="padding-top: 60px;">
+            <div class="form-view">
+                <h1 style="padding-bottom: 50px;">Novo Orçamento</h1>
+                <form id="form">
+                    <div class="form-group row btn-input">
+                        <label for="selectClient" class="col-sm-2 col-form-label">Cliente</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" id="selectClient" required>
+                                <option selected>Selecionar Cliente</option>
+                                <option value="1">Dario</option>
+                                <option value="2">João</option>    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputModel" class="col-sm-2 col-form-label">Modelo</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputModel">
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputBrand" class="col-sm-2 col-form-label">Marca</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputBrand">
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputDefect" class="col-sm-2 col-form-label">Defeito</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputDefect">
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputPasswordProduct" class="col-sm-2 col-form-label">Senha do Produto</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPasswordProduct">
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputDescription" class="col-sm-2 col-form-label">Descrição</label>
+                        <div class="col-sm-10"> 
+                            <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+                        </div>
+                      </div>
+                    <div class="button-option">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()" class="btn btn-danger" >Limpar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+
+</html>
+
+<style>
+    .form-view {
+        border: 70px solid transparent !important;
+    }
+
+    div.btn-input {
+        padding-bottom: 20px;
+    }
+
+    .button-option {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+        .form-view {
+            border: 30px solid transparent !important;
+        }
+    }
+</style>
