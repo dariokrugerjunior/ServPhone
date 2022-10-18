@@ -58,7 +58,7 @@
 
 <filter>
 <filter-name>ServletFilter</filter-name>
-<filter-class>br.com.servphone.security.FilterLogin</filter-class>
+<filter-class>br.com.servphone.security.FilterServlet</filter-class>
 </filter>
 <filter-mapping>
 <filter-name>ServletFilter</filter-name>

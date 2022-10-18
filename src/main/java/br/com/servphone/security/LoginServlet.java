@@ -45,8 +45,6 @@ public class LoginServlet extends HttpServlet {
             JDBCSecurityDAO jdbcSecurityDAO = new JDBCSecurityDAO(conecSQL);
             Employee employeeUser = jdbcSecurityDAO.ValidateUserLoginDB(user);
             connectionDB.closeConnection();
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
 
             if (employeeUser.getStatus() == 1) {
@@ -56,12 +54,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("email", employeeUser.getEmail());// Vincula um objeto a sessao, no caso o login do usuario está sendo colocado na sessao.
                 session.setAttribute("phone", employeeUser.getPhone());
                 session.setAttribute("role", employeeUser.getRole());
-                response.sendRedirect("/servphone_war_exploded/pages/index.html");
-                out.print("true");
+                out.write("ok " + employeeUser.getRole());
             } else if (employeeUser.getStatus() == 0) {
-                out.write("Usuario desativado pelo administrador");
+                response.sendError(500, "Usuario desativado pelo administrador");
             } else {
-                out.write("Login ou senha incorretos.");
+                response.sendError(500, "Login ou senha incorretos.");
             }
 
         }catch (NullPointerException ex) {

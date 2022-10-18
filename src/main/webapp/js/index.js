@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("header").load("/servphone_war_exploded/pages/menu/header.html");
+	$("header").load(`/${sessionStorage.getItem('location')}/pages/menu/header.html`);
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",
