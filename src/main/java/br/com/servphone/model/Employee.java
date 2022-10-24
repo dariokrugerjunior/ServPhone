@@ -1,7 +1,7 @@
 package br.com.servphone.model;
 
 public class Employee {
-
+    private static final long serialVerUID=1L;
     private int id;
     private String name;
     private String phone;

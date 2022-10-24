@@ -1,13 +1,17 @@
 package br.com.servphone.jdbc;
 
 import br.com.servphone.encrypted.EncryptedMD5;
+import br.com.servphone.interfacejdbc.EmployeeDAO;
 import br.com.servphone.model.Employee;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class JDBCEmployeeDAO {
+public class JDBCEmployeeDAO implements EmployeeDAO {
 
     private Connection connection;
     public JDBCEmployeeDAO(Connection connection) {
@@ -39,5 +43,69 @@ public class JDBCEmployeeDAO {
         } catch (Exception ex) {
             return 2;
         }
+    }
+
+    public List<Employee> getAllEmployee() {
+        List<Employee> employeeList = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT em.id, em.name, em.phone, em.status, em.email, em.role, em.salary FROM tb_employee em");
+            while (rs.next()) {
+                employeeList.add(addValueEmployee(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return employeeList;
+    }
+
+    @Override
+    public Employee getEmployeeById(int id) {
+        Employee employee = new Employee();
+        try{
+            Statement stmt = connection.createStatement();
+            String query = String.format("SELECT em.id, em.name, em.phone, em.status, em.email, em.role, em.salary FROM tb_employee em WHERE em.id = %s", id);
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                employee = addValueEmployee(rs);
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return employee;
+    }
+
+    @Override
+    public int updateEmployee(Employee employee) {
+        try {
+            Statement stmt = connection.createStatement();
+            String query = String.format("UPDATE tb_employee SET (name, phone, status, role, salary) VALUES (%s, %s, %d, %d, %f)",
+                    employee.getName(),
+                    employee.getPhone(),
+                    employee.getStatus(),
+                    employee.getRole(),
+                    employee.getSalary());
+            stmt.executeQuery(query);
+            return 1;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    private Employee addValueEmployee(ResultSet rs) throws SQLException {
+        Employee employee = new Employee();
+        try{
+            employee.setId(rs.getInt("id"));
+            employee.setName(rs.getString("name"));
+            employee.setPhone(rs.getString("phone"));
+            employee.setEmail(rs.getString("email"));
+            employee.setSalary(rs.getDouble("salary"));
+            employee.setStatus(rs.getInt("status"));
+            employee.setRole(rs.getInt("role"));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return employee;
     }
 }

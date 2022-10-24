@@ -5,14 +5,14 @@ import br.com.servphone.jdbc.JDBCEmployeeDAO;
 import br.com.servphone.model.Employee;
 import com.google.gson.Gson;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Connection;
+import java.util.List;
 
 
-@Path("/employe")
+@Path("/employee")
 public class EmployeeRest extends UtilRest {
     @POST
     @Path("/register")
@@ -41,4 +41,61 @@ public class EmployeeRest extends UtilRest {
             return this.buildErrorResponse(ex.getMessage());
         }
     }
+
+    @GET
+    @Path("/get")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Employee> getAll() {
+        List<Employee> employees = null;
+        try {
+
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCEmployeeDAO jdbcEmployeeDAO = new JDBCEmployeeDAO(connection);
+            employees = jdbcEmployeeDAO.getAllEmployee();
+            connectionDB.closeConnection();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return employees;
+    }
+
+    @GET
+    @Path("/get-by-id")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Employee getByIdEmployee(@QueryParam("id") int id) {
+        Employee employee = new Employee();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCEmployeeDAO jdbcEmployeeDAO = new JDBCEmployeeDAO(connection);
+            employee = jdbcEmployeeDAO.getEmployeeById(id);
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return employee;
+    }
+
+    @PUT
+    @Path("update")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateEmployee(String employeeParam) {
+        try {
+            Employee employee = new Gson().fromJson(employeeParam, Employee.class);
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCEmployeeDAO jdbcEmployeeDAO = new JDBCEmployeeDAO(connection);
+            jdbcEmployeeDAO.updateEmployee(employee);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+
 }
