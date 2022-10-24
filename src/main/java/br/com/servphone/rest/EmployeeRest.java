@@ -81,7 +81,7 @@ public class EmployeeRest extends UtilRest {
     }
 
     @PUT
-    @Path("update")
+    @Path("/update")
     @Consumes("application/*")
     @Produces(MediaType.APPLICATION_JSON)
     public int updateEmployee(String employeeParam) {

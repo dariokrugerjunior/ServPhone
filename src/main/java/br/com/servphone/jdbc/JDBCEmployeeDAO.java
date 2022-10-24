@@ -79,14 +79,18 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
     public int updateEmployee(Employee employee) {
         try {
             Statement stmt = connection.createStatement();
-            String query = String.format("UPDATE tb_employee SET (name, phone, status, role, salary) VALUES (%s, %s, %d, %d, %f)",
+            String query = String.format("UPDATE tb_employee SET name = '%s', phone = '%s', status = %x, role = %x, salary = '%s', email = '%s' WHERE id=%x",
                     employee.getName(),
                     employee.getPhone(),
                     employee.getStatus(),
                     employee.getRole(),
-                    employee.getSalary());
-            stmt.executeQuery(query);
-            return 1;
+                    employee.getSalary(),
+                    employee.getEmail(),
+                    employee.getId());
+            ResultSet rs = stmt.executeQuery(query);
+            if(rs.next()){
+                return 1;
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

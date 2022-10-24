@@ -27,25 +27,26 @@ function setValueEmployee(employee) {
 
 function setUpdateEmployee(updateEmployee) {
 	$.ajax({
-		type: "GET",
+		type: "PUT",
 		url: `/servphone_war_exploded/servphone/rest/employee/update`,
 		data: JSON.stringify(updateEmployee)
 	}).then((response) => {
 		console.log("response", response)
+		getEmployeeById()
 	}).catch((error) => {
-		console.log(error)
+		console.log(error, 'error')
 	})
 }
 
 function updateEmployee(){
 	var employee = new Object();
-    employee.name=document.frm.inputName.value;
-    employee.salary=document.frm.inputSalary.value.replace(".", "").replace(",",".");
-    employee.status=document.frm.selectStatus.value;
-    employee.email=document.frm.inputEmail.value;
-    employee.phone=document.frm.inputPhone.value;
-    employee.role=document.frm.selectRole.value;
-	console.log(employee)
+	employee.id = new URLSearchParams(window.location.search).get('id')
+    employee.name = document.getElementById("inputName").value;
+    employee.salary = document.getElementById("inputSalary").value.replace(".", "").replace(",",".");
+    employee.status = document.getElementById("selectStatus").value ;
+    employee.email = document.getElementById("inputEmail").value;
+    employee.phone = document.getElementById("inputPhone").value;
+    employee.role = document.getElementById("selectRole").value ;
 	setUpdateEmployee(employee)
 }
 
