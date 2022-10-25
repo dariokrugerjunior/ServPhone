@@ -25,19 +25,19 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
             if (rs.next()) {
                 return 0; // ERRO, EMAIL DUPLICADO
             } else {
-                String query = String.format("INSERT INTO tb_employee (name, phone, status, email, password, role, salary) VALUES (%s, %s, %d, %s, %s, %d, %f)",
-                        employee.getName(),
-                        employee.getPhone(),
-                        employee.getStatus(),
-                        employee.getEmail().toLowerCase(),
-                        passwordMd5,
-                        employee.getRole(),
-                        employee.getSalary());
-                stmt = connection.createStatement();
-                stmt.executeQuery(query);
+                PreparedStatement pstmt = connection.prepareStatement("INSERT INTO tb_employee (name, phone, status, email, password, role, salary) VALUES (?, ?, ?, ?, ?, ?, ? )");
+                pstmt.setString(1, employee.getName());
+                pstmt.setString(2, employee.getPhone());
+                pstmt.setInt(3, employee.getStatus());
+                pstmt.setString(4, employee.getEmail());
+                pstmt.setString(5, passwordMd5);
+                pstmt.setInt(6, employee.getRole());
+                pstmt.setDouble(7, employee.getSalary());
+                pstmt.execute();
                 return 1;
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             return 2;
         }
     }
