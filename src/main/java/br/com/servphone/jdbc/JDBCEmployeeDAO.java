@@ -4,10 +4,7 @@ import br.com.servphone.encrypted.EncryptedMD5;
 import br.com.servphone.interfacejdbc.EmployeeDAO;
 import br.com.servphone.model.Employee;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,19 +75,18 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
     @Override
     public int updateEmployee(Employee employee) {
         try {
-            Statement stmt = connection.createStatement();
-            String query = String.format("UPDATE tb_employee SET name = '%s', phone = '%s', status = %x, role = %x, salary = '%s', email = '%s' WHERE id=%x",
-                    employee.getName(),
-                    employee.getPhone(),
-                    employee.getStatus(),
-                    employee.getRole(),
-                    employee.getSalary(),
-                    employee.getEmail(),
-                    employee.getId());
-            ResultSet rs = stmt.executeQuery(query);
-            if(rs.next()){
-                return 1;
-            }
+            PreparedStatement stmt = connection.prepareStatement("UPDATE tb_employee SET " +
+                    "name = ?, phone = ?, status = ?, role = ?, salary = ?, email = ? WHERE id = ?");
+            stmt.setString(1, employee.getName());
+            stmt.setString(2, employee.getPhone());
+            stmt.setInt(3, employee.getStatus());
+            stmt.setInt(4, employee.getRole());
+            stmt.setDouble(5, employee.getSalary());
+            stmt.setString(6, employee.getEmail());
+            stmt.setInt(7, employee.getId());
+
+            stmt.executeUpdate();
+            return 1;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
