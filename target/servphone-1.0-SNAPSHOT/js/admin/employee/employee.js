@@ -21,7 +21,6 @@ function setEmployeeTable(listEmployee) {
 			<th scope="row">${employee.id}</th>
 			<td>${employee.name}</td>
 			<td>${employee.role === 0 ? 'Administração' : 'Tecnico'}</td>
-			<td>${employee.phone}</td>
 			<td>
 			<a href="/servphone_war_exploded/pages/admin/employee/edit-employee.html?id=${employee.id}">
 				<button class="navbar-toggler custom-toggler" type="button">

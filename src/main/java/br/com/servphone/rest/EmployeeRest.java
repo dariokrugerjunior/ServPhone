@@ -90,7 +90,9 @@ public class EmployeeRest extends UtilRest {
             ConnectionDB connectionDB = new ConnectionDB();
             Connection connection = connectionDB.openConnection();
             JDBCEmployeeDAO jdbcEmployeeDAO = new JDBCEmployeeDAO(connection);
-            return jdbcEmployeeDAO.updateEmployee(employee);
+            int result = jdbcEmployeeDAO.updateEmployee(employee);
+            connectionDB.closeConnection();
+            return result;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
