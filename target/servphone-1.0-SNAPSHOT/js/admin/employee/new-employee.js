@@ -73,6 +73,7 @@ function registerEmployee(employee) {
 		data: JSON.stringify(employee)
 	}).then((response) => {
 		if (response === 'Funcionario cadastrado!') {
+            document.getElementById("form").reset()
 			actionModal("Sucesso", response)
 		} else {
             actionModal("Erro", response)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<link rel="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" />
 
 <head>
     <meta charset="UTF-8">
@@ -8,10 +9,14 @@
     <meta name="author" content="Dario Kruger Junior">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/admin/client/edit-client.js"></script>
+    <script src="../../../js/admin/client/edit-client.js"></script>
 </head>
 
 <body>
@@ -20,8 +25,8 @@
     <section>
         <div style="padding-top: 60px;">
             <div class="form-view">
-                <h1 style="padding-bottom: 50px;">Cliente {Nome Cliente}</h1>
-                <form id="form">
+                <h1 id="title" style="padding-bottom: 50px;"></h1>
+                <form id="frm">
                     <div class="form-group row btn-input">
                         <label for="inputName" class="col-sm-2 col-form-label">Nome Completo</label>
                         <div class="col-sm-10">
@@ -83,27 +88,49 @@
                         </div>
                     </div>
                     <div class="form-group row btn-input">
-                        <label for="inputAddressState" class="col-sm-2 col-form-label">Complemento</label>
+                        <label for="inputAddressComplement" class="col-sm-2 col-form-label">Complemento</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputAddressState">
+                            <input type="text" class="form-control" id="inputAddressComplement">
                         </div>
                     </div>
                     <div class="form-group row btn-input">
                         <label for="selectStatus" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
                             <select class="form-select" id="selectStatus" required>
-                                <option selected="1">Ativado</option>
-                                <option value="2">Desativado</option>    
+                                <option value="1">Ativado</option>
+                                <option value="0">Desativado</option>    
                             </select>
                         </div>
                     </div>
                     <div class="button-option">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <a href="/pages/admin/client/client.html">
+                        <button type="button" class="btn btn-primary" onclick="updateClient()">Salvar</button>
+                        <a href="client.html">
                             <button type='button' class="btn btn-danger" >Cancelar</button>
                         </a>
                     </div>
                 </form>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="body-content"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="tag-button" href="client.html">
+                            <button id="button-pr" type="button" class="btn btn-primary">
+                                Voltar para pagina de Clientes
+                            </button>   
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
