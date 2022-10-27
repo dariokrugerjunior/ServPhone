@@ -30,6 +30,7 @@ public class FilterServlet implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         } catch (Exception ex) {
+            ((HttpServletResponse) servletResponse).sendRedirect("/servphone_war_exploded/error.html");
             ex.printStackTrace();
         }
     }

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log('header')
     var role = sessionStorage.getItem('role');
     //admin = 0
     //tech = 1
@@ -14,3 +13,15 @@ $(document).ready(function () {
     }
     document.getElementById("menu-option").innerHTML = contentButton
 });
+
+function logout() {
+    $.ajax({
+        type: "POST",
+        url: "/servphone_war_exploded/security/logout",
+    }).then((response) => {
+        if(response){
+            window.location.href=("/servphone_war_exploded/index.html")
+        }
+    }).catch((error) => {
+    })
+}
