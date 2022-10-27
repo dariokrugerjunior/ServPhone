@@ -42,8 +42,6 @@ function validateInputs() {
         return false
     }
 
-    console.log('document.getElementById("inputPassword").value', document.getElementById("inputPassword").value)
-    console.log('document.getElementById("inputPasswordConfirm").value', document.getElementById("inputPasswordConfirm").value)
     if (document.getElementById("inputPassword").value !== document.getElementById("inputPasswordConfirm").value) {
         actionModal("Aviso!", "Senha não correspondem")
         return false

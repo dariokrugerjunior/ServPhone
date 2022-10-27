@@ -55,10 +55,12 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("phone", employeeUser.getPhone());
                 session.setAttribute("role", employeeUser.getRole());
                 out.write("ok " + employeeUser.getRole());
-            } else if (employeeUser.getStatus() == 0) {
+            } else if (employeeUser.getEmail() == null) {
+                response.sendError(500, "Login ou senha incorretos.");
+            } else if (employeeUser.getStatus() == 0){
                 response.sendError(500, "Usuario desativado pelo administrador");
             } else {
-                response.sendError(500, "Login ou senha incorretos.");
+                response.sendError(500, "Erro ao fazer login favor acionar os administradores");
             }
 
         }catch (NullPointerException ex) {

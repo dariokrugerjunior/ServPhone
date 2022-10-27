@@ -29,9 +29,9 @@ public class EmployeeRest extends UtilRest {
             connectionDB.closeConnection();
 
             if (returnRegister == 0) {
-                return this.buildErrorResponse("CPF já está cadastrado no sistema! ");
+                return this.buildErrorResponse("Email já está cadastrado no sistema! ");
             } else if (returnRegister == 1){
-                return this.buildErrorResponse("Funcionario cadastrado!");
+                return this.buildResponseMsg("Funcionario cadastrado!");
             } else {
                 return this.buildErrorResponse("Erro ao cadastrar no banco de dados, favor informar o administrador.");
             }

@@ -17,10 +17,16 @@ validateLogin = function () {
             sessionStorage.setItem('location', location.pathname.split("/").filter((x) => x.includes('servphone_war')).toString());
             window.location.assign(page);
         } else {
-            actionModal("Erro", `Não foi possivel fazer o login: Email ou senha incorreta`)
+            actionModal("Erro", `Não foi possivel fazer o login`)
         }
     }).catch((error) => {
-        actionModal("Erro", `Não foi possivel fazer o login: Email ou senha incorreta`)
+        if(error.responseText.includes('Usuario desativado pelo administrador')){
+            actionModal("Erro", 'Usuario desativado pelo administrador')
+        } else if (error.responseText.includes('Login ou senha incorretos.')) {
+            actionModal("Erro", 'Login ou senha incorretos.')
+        } else {
+            actionModal("Erro", 'Erro ao fazer login favor acionar os administradores')
+        }
     })
 }
 

@@ -85,8 +85,7 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
             stmt.setString(6, employee.getEmail());
             stmt.setInt(7, employee.getId());
 
-            stmt.executeUpdate();
-            return 1;
+            return stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

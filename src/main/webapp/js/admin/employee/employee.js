@@ -10,7 +10,6 @@ function getEmployee() {
 	}).then((response) => {
 		setEmployeeTable(response)
 	}).catch((error) => {
-		console.log(error)
 	})
 }
 

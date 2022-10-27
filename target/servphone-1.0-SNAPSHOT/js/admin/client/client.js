@@ -10,13 +10,11 @@ function getClientById() {
 	}).then((response) => {
 		setClientTable(response)
 	}).catch((error) => {
-		console.log(error)
 	})
 }
 
 function setClientTable(listClient) {
 	listClient.forEach(client => {
-		console.log(client, 'client')
 		let rowTable = 
 		`<tr> 
 			<th scope="row">${client.id}</th>
