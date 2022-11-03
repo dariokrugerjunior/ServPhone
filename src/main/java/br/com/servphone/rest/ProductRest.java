@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,30 @@ public class ProductRest extends UtilRest {
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    @POST
+    @Path("/register")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response registerUpdate(String productParam) {
+        try {
+            Product product = new Gson().fromJson(productParam, Product.class);
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCProductDAO jdbcProductDAO = new JDBCProductDAO(connection);
+            int returnRegister = jdbcProductDAO.registerProduct(product);
+            connectionDB.closeConnection();
+            if (returnRegister == 0) {
+                return this.buildErrorResponse("Erro ao cadastrar produto!");
+            } else if (returnRegister == 2) {
+                return this.buildErrorResponse("Produto já cadastrado");
+            } else {
+                return this.buildResponseMsg("Produto cadastrado com sucesso!");
+            }
+        } catch (Exception ex) {
+            return this.buildErrorResponse(ex.getMessage());
+        }
     }
 
 }

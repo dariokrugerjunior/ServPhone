@@ -45,7 +45,6 @@ function updateProduct() {
 
 
 function setValueProduct(product) {
-	console.log(product)
 	document.getElementById("title").innerHTML = `Produto: ${product.name}`
 	document.getElementById("inputName").value = product.name
 	document.getElementById("inputPrice").value = product.valueSale

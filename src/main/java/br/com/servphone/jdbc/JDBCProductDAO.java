@@ -3,6 +3,7 @@ package br.com.servphone.jdbc;
 import br.com.servphone.interfacejdbc.ProductDAO;
 import br.com.servphone.model.Product;
 
+import javax.ws.rs.core.Response;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,6 +58,27 @@ public class JDBCProductDAO implements ProductDAO {
             preparedStatement.setDouble(1, product.getValueSale());
             preparedStatement.setInt(2, product.getStatus());
             preparedStatement.setInt(3, product.getId());
+            return preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int registerProduct(Product product) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM tb_product WHERE name= ?");
+            preparedStatement.setString(1, product.getName());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return 2;
+            }
+            preparedStatement = connection.prepareStatement("INSERT tb_product (name, value_sale, status) " +
+                    "VAlUES (?, ?, ?)");
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getValueSale());
+            preparedStatement.setInt(3, product.getStatus());
             return preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();

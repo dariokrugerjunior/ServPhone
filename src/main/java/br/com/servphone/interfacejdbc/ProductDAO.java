@@ -12,4 +12,6 @@ public interface ProductDAO {
 
     public int updateProduct(Product product);
 
+    public int registerProduct(Product product);
+
 }
