@@ -15,12 +15,29 @@ function getServiceById() {
 	})
 }
 
+function setUpdateService(updateService) {
+	$.ajax({
+		type: "PUT",
+		url: `/servphone_war_exploded/servphone/rest/service/update`,
+		data: JSON.stringify(updateService)
+	}).then((response) => {
+		getServiceById()
+		if (response > 0) {
+			actionModal("Sucesso", "Alteração salva com sucesso!")
+		} else {
+			actionModal("Erro", "Não foi possivel fazer a alteração")
+		}
+	}).catch((error) => {
+		actionModal("Erro", `Não foi possivel fazer a alteração: ${error.message}`)
+	})
+}
+
 function updateService() {
 	if (validateInputs()) {
 		var service = new Object();
 		service.id = new URLSearchParams(window.location.search).get('id')
 		service.name = document.getElementById("inputName").value
-		service.price_hours = document.getElementById("inputPrice").value
+		service.priceHours = document.getElementById("inputPrice").value
 		service.status = document.getElementById("selectStatus").value
 		setUpdateService(service)
 	}
