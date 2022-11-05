@@ -15,6 +15,7 @@ validateLogin = function () {
             }
             sessionStorage.setItem('role', response.toString().replaceAll('ok ', ''))
             sessionStorage.setItem('location', location.pathname.split("/").filter((x) => x.includes('servphone_war')).toString());
+            sessionStorage.setItem('name', login)
             window.location.assign(page);
         } else {
             actionModal("Erro", `Não foi possivel fazer o login`)
