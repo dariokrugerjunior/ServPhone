@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var role = sessionStorage.getItem('role');
+    document.getElementById('name-title').innerHTML = `Olá ${sessionStorage.getItem('name')} <a type="button" onclick="logout()" class="card-link">Sair</a>`
     //admin = 0
     //tech = 1
     let contentButton = `<a href="/servphone_war_exploded/pages/budget/budget.html" type="button" class="btn btn-outline-primary" >Orçamentos</a>
