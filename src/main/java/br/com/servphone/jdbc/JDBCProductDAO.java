@@ -86,6 +86,21 @@ public class JDBCProductDAO implements ProductDAO {
         return 0;
     }
 
+    @Override
+    public List<Product> getProductActive() {
+        List<Product> products = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tb_product WHERE status= 1");
+            while (rs.next()) {
+                products.add(addValueProduct(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
     private Product addValueProduct(ResultSet rs) {
         Product product = new Product();
         try {

@@ -14,4 +14,7 @@ public interface ClientDAO {
     int updateClient(Client client);
 
     int registerClient(Client client) throws SQLException;
+
+    List<Client> getClientActive();
+
 }

@@ -94,4 +94,22 @@ public class ProductRest extends UtilRest {
         }
     }
 
+    @GET
+    @Path("/product-active")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getProductActive() {
+        List<Product> products = new ArrayList<>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCProductDAO jdbcProductDAO = new JDBCProductDAO(connection);
+            products = jdbcProductDAO.getProductActive();
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
 }

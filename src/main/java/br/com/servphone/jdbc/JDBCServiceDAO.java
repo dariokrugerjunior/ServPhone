@@ -85,6 +85,21 @@ public class JDBCServiceDAO implements ServiceDAO {
         return 0;
     }
 
+    @Override
+    public List<Service> getServicesActive() {
+        List<Service> services = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tb_service WHERE status= 1");
+            while (rs.next()) {
+                services.add(addValueService(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return services;
+    }
+
     private Service addValueService(ResultSet rs) {
         Service service = new Service();
         try {

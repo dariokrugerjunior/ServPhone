@@ -1,9 +1,9 @@
 $(document).ready(function(){   
 	$("header").load("../../../pages/menu/header.html");
-	getClientById()
+	getClient()
 });
 
-function getClientById() {
+function getClient() {
 	$.ajax({
 		type: "GET",
 		url: "/servphone_war_exploded/servphone/rest/client/get",

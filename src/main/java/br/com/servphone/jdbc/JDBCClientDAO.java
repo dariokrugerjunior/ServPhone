@@ -115,6 +115,21 @@ public class JDBCClientDAO implements ClientDAO {
         return 2;
     }
 
+    @Override
+    public List<Client> getClientActive() {
+        List<Client> clients = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tb_client WHERE status=1");
+            while (rs.next()) {
+                clients.add(addValueClient(rs));
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return clients;
+    }
+
     private Client addValueClient(ResultSet rs) {
         Client client = new Client();
         try {

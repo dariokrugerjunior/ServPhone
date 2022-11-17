@@ -9,6 +9,7 @@ public interface ServiceDAO {
     public Service getServiceById(int id);
     public int updateService(Service service);
     public int registerService(Service service);
+    public List<Service> getServicesActive();
 
 
 

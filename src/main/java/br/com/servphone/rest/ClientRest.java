@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/client")
@@ -94,6 +95,23 @@ public class ClientRest extends UtilRest{
         } catch (Exception ex) {
             return this.buildErrorResponse(ex.getMessage());
         }
+    }
+
+    @GET
+    @Path("/client-active")
+    @Consumes("application/*")
+    public List<Client> getClientActive() {
+        List<Client> clients = new ArrayList<Client>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCClientDAO jdbcClientDAO = new JDBCClientDAO(connection);
+            clients = jdbcClientDAO.getClientActive();
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return clients;
     }
 
 }

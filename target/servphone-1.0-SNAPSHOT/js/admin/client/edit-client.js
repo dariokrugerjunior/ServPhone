@@ -57,7 +57,11 @@ function updateClient() {
 		client.city = document.getElementById("inputAddressCity").value
 		client.state = document.getElementById("inputAddressState").value
 		client.complement = document.getElementById("inputAddressComplement").value
-		client.status = document.getElementById("selectStatus").value
+		if(document.getElementById("selectStatus").value == 0){
+			client.status = false
+		}else{
+			client.status = true
+		}
 		setUpdateClient(client)
 	}
 }

@@ -95,5 +95,23 @@ public class ServiceRest extends UtilRest {
             return this.buildErrorResponse(ex.getMessage());
         }
     }
+    @GET
+    @Path("/service-active")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Service> getServiceActive() {
+        List<Service> services = new ArrayList<>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCServiceDAO jdbcServiceDAO = new JDBCServiceDAO(connection);
+            services = jdbcServiceDAO.getServicesActive();
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return services;
+    }
+
 
 }

@@ -14,4 +14,6 @@ public interface ProductDAO {
 
     public int registerProduct(Product product);
 
+    public List<Product> getProductActive();
+
 }
