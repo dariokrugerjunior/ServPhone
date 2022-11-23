@@ -19,7 +19,8 @@ function setProductTable(listProduct) {
 		`<tr> 
 			<th scope="row">${product.id}</th>
 			<td>${product.name}</td>
-			<td>${product.valueSale}</td>
+			<td>${product.valueSale.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+			<td>${product.status == 0 ? 'Desativado' : 'Ativado' }</td>
 			<td>
 			<a href="/servphone_war_exploded/pages/product/edit-product.html?id=${product.id}">
 				<button class="navbar-toggler custom-toggler" type="button">

@@ -19,7 +19,8 @@ function setServiceTable(listService) {
 		`<tr> 
 			<th scope="row">${service.id}</th>
 			<td>${service.name}</td>
-			<td>${service.priceHours}</td>
+			<td>${service.priceHours.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+			<td>${service.status == 0 ? 'Desativado' : 'Ativado' }</td>
 			<td>
 			<a href="/servphone_war_exploded/pages/services/edit-services.html?id=${service.id}">
 				<button class="navbar-toggler custom-toggler" type="button">
