@@ -20,7 +20,7 @@ function getClient() {
 function setClient(response) {
     document.getElementById('selectClient').innerHTML = ''
     if (response.length > 0) {
-        response.forEach(client => {
+        response.sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ).forEach(client => {
             document.getElementById('selectClient').innerHTML += `<option value="${client.id}">${client.name}</option>')`
         });
     } else {
@@ -54,8 +54,46 @@ function validateInputs() {
 		actionModal("Aviso!", "Preencha o campo descrição corretamente")
 		return false
 	}
-
-
-
 	return true
+}
+
+function setBudget() {
+    if (validateInputs()) {
+        var budget = Object();
+        budget.status = 1
+		budget.model = document.getElementById("inputModel").value
+		budget.brand = document.getElementById("inputBrand").value
+		budget.defect = document.getElementById("inputDefect").value
+		budget.description = document.getElementById("inputDescription").value
+		budget.password_product = document.getElementById("inputPasswordProduct").value
+		budget.client_id = document.getElementById('selectClient').value
+		registerBudget(budget)
+    }
+}
+
+function actionModal(title, message) {
+	var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+		keyboard: false,
+	})
+	myModal
+	$("#body-content").html(message)
+	$("#myModalLabel").html(title)
+	myModal.show()
+}
+
+function registerBudget(budget) {
+	$.ajax({
+		type: "POST",
+		url: `/servphone_war_exploded/servphone/rest/budget/register`,
+		data: JSON.stringify(budget)
+	}).then((response) => {
+		if (response === 'Orçamento cadastrado com sucesso!') {
+            document.getElementById("form").reset()
+			actionModal("Sucesso", response)
+		} else {
+            actionModal("Erro", response)
+        }
+	}).catch((error) => {
+		actionModal("Erro", `Não foi possivel fazer o cadastro: ${error.responseText}`)
+	})
 }

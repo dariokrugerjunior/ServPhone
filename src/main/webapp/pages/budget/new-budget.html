@@ -65,11 +65,32 @@
                         </div>
                     </div>
                     <div class="button-option">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type='reset' value='Reset' name='reset' onclick="return resetForm()"
+                        <button type="button" class="btn btn-primary" onclick="setBudget()">Salvar</button>
+                        <button type='button' onclick="return resetForm()"
                             class="btn btn-danger">Limpar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="body-content"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="tag-button" href="budget.html">
+                            <button id="button-pr" type="button" class="btn btn-primary">
+                                Voltar para pagina de Orçamento
+                            </button>   
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
