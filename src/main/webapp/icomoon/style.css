@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?sgnd89');
+  src:  url('fonts/icomoon.eot?sgnd89#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?sgnd89') format('truetype'),
+    url('fonts/icomoon.woff?sgnd89') format('woff'),
+    url('fonts/icomoon.svg?sgnd89#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil:before {
+  content: "\e905";
+}
+.icon-coin-dollar:before {
+  content: "\e93b";
+}
+.icon-hour-glass:before {
+  content: "\e979";
+}
+.icon-wrench:before {
+  content: "\e991";
+}
+.icon-truck:before {
+  content: "\e9b0";
+}
+.icon-info:before {
+  content: "\ea0c";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
+.icon-whatsapp:before {
+  content: "\ea93";
+}
