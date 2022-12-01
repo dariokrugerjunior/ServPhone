@@ -2,19 +2,6 @@ $(document).ready(function () {
 	$("header").load("/pages/menu/header.html");
 
 	var role = 1
-	//admin = 0
-	// 	Aguardando Administração
-	// Enviar para Técnico
-	// Esperando Resposta do Cliente
-	// Avisar Cliente
-
-	//tech = 1
-	// 	Em Analise Técnico
-	// Aguardando Peça
-	// Em Manutenção
-	// Serviço Realizado
-	// Enviar para Adm
-
 
 	var optionStatus = []
 	if (role === 0) {

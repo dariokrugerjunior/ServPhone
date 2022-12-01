@@ -10,6 +10,9 @@ public class Budget {
     private String password_product;
     private int client_id;
     private int employee_id;
+    private String name;
+    private int view;
+    private String phone;
 
     public int getId() {
         return id;
@@ -82,4 +85,23 @@ public class Budget {
     public void setEmployee_id(int employee_id) {
         this.employee_id = employee_id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 }
