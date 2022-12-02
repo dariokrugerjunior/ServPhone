@@ -40,33 +40,31 @@ public class JDBCBudgetDAO implements BudgetDAO {
     }
 
     @Override
-    public List<Budget> getByView(int view) {
+    public List<Budget> getAllByRole(int role) {
         List<Budget> budgets = new ArrayList<>();
         try {
+            String query = "SELECT B.*, C.name, C.phone FROM tb_budget B LEFT JOIN tb_client C on B.client_id = C.id";
+            if (role == 1) {
+                query += " WHERE B.status in (1, 4, 5, 8)";
+            }
             Statement stmt = connection.createStatement();
-            String query = String.format("SELECT B.*, C.name, C.phone FROM tb_budget B LEFT JOIN tb_client C on B.client_id = C.id where B.view = %s or B.view = 3", view);
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 budgets.add(addValueBudgetAndClient(rs));
             }
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return budgets;
     }
 
     @Override
-    public int updateStatus(int id, int status, int view) {
+    public int updateStatus(int id, int status) {
         try {
-            Budget budget = getById(id);
-            if (budget.getView() == 3 || budget.getView() == view) {
-                PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ? where id = ?");
-                stmt.setInt(1, status);
-                stmt.setInt(2, id);
-                return stmt.executeUpdate();
-            } else {
-                return 2;
-            }
+            PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ? where id = ?");
+            stmt.setInt(1, status);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -117,7 +115,6 @@ public class JDBCBudgetDAO implements BudgetDAO {
             budget.setPassword_product(rs.getString("password_product"));
             budget.setClient_id(rs.getInt("client_id"));
             budget.setEmployee_id(rs.getInt("employee_id"));
-            budget.setView(rs.getInt("view"));
             budget.setName(rs.getString("name"));
             budget.setPhone(rs.getString("phone"));
         } catch (Exception ex) {

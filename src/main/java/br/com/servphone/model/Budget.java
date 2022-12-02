@@ -11,7 +11,6 @@ public class Budget {
     private int client_id;
     private int employee_id;
     private String name;
-    private int view;
     private String phone;
 
     public int getId() {
@@ -92,14 +91,6 @@ public class Budget {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getView() {
-        return view;
-    }
-
-    public void setView(int view) {
-        this.view = view;
     }
 
     public String getPhone() { return phone; }

@@ -36,15 +36,15 @@ public class BudgetRest extends UtilRest{
     }
 
     @GET
-    @Path("/get-by-view")
+    @Path("/get-all-by-role")
     @Consumes("application/*")
-    public List<Budget> getByView(@QueryParam("view") int view) {
+    public List<Budget> getAllByRole(@QueryParam("role") int role) {
         List<Budget> budgets = new ArrayList<>();
         try {
             ConnectionDB connectionDB = new ConnectionDB();
             Connection connection = connectionDB.openConnection();
             JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
-            budgets = jdbcBudgetDAO.getByView(view);
+            budgets = jdbcBudgetDAO.getAllByRole(role);
             connectionDB.closeConnection();
 
         } catch (Exception ex) {
@@ -62,7 +62,7 @@ public class BudgetRest extends UtilRest{
             ConnectionDB connectionDB = new ConnectionDB();
             Connection connection = connectionDB.openConnection();
             JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
-            return jdbcBudgetDAO.updateStatus(budget.getId(), budget.getStatus(), budget.getView());
+            return jdbcBudgetDAO.updateStatus(budget.getId(), budget.getStatus());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -84,5 +84,22 @@ public class BudgetRest extends UtilRest{
             ex.printStackTrace();
         }
         return budgets;
+    }
+
+    @GET
+    @Path("/get-by-id")
+    @Consumes("application/*")
+    public Budget getById(@QueryParam("id") int id){
+        Budget budget = new Budget();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
+            budget = jdbcBudgetDAO.getById(id);
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return budget;
     }
 }

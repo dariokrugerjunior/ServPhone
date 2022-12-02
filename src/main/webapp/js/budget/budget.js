@@ -6,8 +6,8 @@ $(document).ready(function () {
 function getBudgets() {
 	$.ajax({
 		type: "GET",
-		url: "/servphone_war_exploded/servphone/rest/budget/get-by-view",
-		data: `view=${sessionStorage.getItem('role')}`
+		url: "/servphone_war_exploded/servphone/rest/budget/get-all-by-role",
+		data: `role=${sessionStorage.getItem('role')}`
 	}).then((response) => {
 		setBudgetsTable(response)
 	}).catch((error) => {
@@ -41,7 +41,7 @@ function setSelectValue() {
 			<option value="4">${setBudgetStatus(4)}</option>
 			<option value="1">${setBudgetStatus(1)}</option>
 			<option value="5">${setBudgetStatus(5)}</option>
-			<option value="14">Todos</option>
+			<option selected value="14">Todos</option>
 		`
 	} else {
 		document.getElementById('select-status').innerHTML =
@@ -57,7 +57,7 @@ function setSelectValue() {
 			<option value="11">${setBudgetStatus(11)}</option>
 			<option value="12">${setBudgetStatus(12)}</option>
 			<option value="7">${setBudgetStatus(7)}</option>
-			<option value="14">Todos</option>
+			<option selected value="14">Todos</option>
 		`
 	}
 }
@@ -82,7 +82,8 @@ function setBudgetStatus(statusCode) {
 
 function setBudgetAction(budget) {
 	switch (budget.status) {
-		case 1: return `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>`
+		case 1: return sessionStorage.getItem('role') == 0 ? `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>` 
+						: `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>`
 		case 2: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
 						<i style="cursor:pointer" class="icon-hour-glass" onclick="updateStatus(${budget.id}, 9)"></i>`
 		case 3: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
@@ -90,8 +91,8 @@ function setBudgetAction(budget) {
 						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
 		case 4: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
 						<i class="icon-hour-glass"></i> ${sessionStorage.getItem('role') == 1 ? `<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 5)"></i>` : ''}`
-		case 5: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
-						${sessionStorage.getItem('role') == 1 ? `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i> <i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 9)"></i>` : ''}`
+		case 5: return `<i	 style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
+						${sessionStorage.getItem('role') == 1 ? `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i> <i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>` : ''}`
 		case 6: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>
 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 7)"></i>`
 		case 7: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}?status=${budget.status}')"></i>`
@@ -119,7 +120,6 @@ function updateStatus(id, status) {
 	var budget = new Object();
 	budget.id = id
 	budget.status = status;
-	budget.view = sessionStorage.getItem('role');
 	$.ajax({
 		type: "POST",
 		url: "/servphone_war_exploded/servphone/rest/budget/update-status",
