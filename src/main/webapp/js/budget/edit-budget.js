@@ -302,7 +302,6 @@ function updateBudget() {
 		budget.description = document.getElementById('inputDescription').value
 		budget.products = Products
 		budget.services = Services
-		console.log(budget)
 		setUpdateBudget(budget)
 	}
 	
@@ -334,6 +333,7 @@ function setUpdateBudget(updateBudget) {
 		data: JSON.stringify(updateBudget)
 	}).then((response) => {
 		if (response > 0) {
+			updateStatus(updateBudget.id, 9)
 			actionModal("Sucesso", `Orçamento alterado com sucesso`)
 		}else {
 			actionModal("Erro", `Não foi possivel fazer no orçamento`)
@@ -345,6 +345,20 @@ function setUpdateBudget(updateBudget) {
 
 function goToUrl() {
 	window.location = 'budget.html'
+}
+
+function updateStatus(id, status) {
+	var budget = new Object();
+	budget.id = id
+	budget.status = status;
+	$.ajax({
+		type: "POST",
+		url: "/servphone_war_exploded/servphone/rest/budget/update-status",
+		data: JSON.stringify(budget)
+	}).then((response) => {
+	}).catch((error) => {
+		actionModal('Erro', 'Erro ao critico ao atualizar status, acionar os administradores')
+	})
 }
 
 
