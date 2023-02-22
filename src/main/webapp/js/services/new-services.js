@@ -35,7 +35,7 @@ function setService () {
     if(validateInputs()){
         var service = new Object();
         service.name = document.getElementById("inputName").value
-		service.priceHours = document.getElementById("inputPrice").value
+		service.price_hours = document.getElementById("inputPrice").value
         service.status = 1
         registerService(service)
     }

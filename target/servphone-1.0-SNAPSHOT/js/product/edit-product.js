@@ -47,7 +47,7 @@ function updateProduct() {
 function setValueProduct(product) {
 	document.getElementById("title").innerHTML = `Produto: ${product.name}`
 	document.getElementById("inputName").value = product.name
-	document.getElementById("inputPrice").value = product.valueSale
+	document.getElementById("inputPrice").value = product.value_sale
 	let status = 0;
 	if(product.status){
 		status = 1

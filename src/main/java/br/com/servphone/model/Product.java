@@ -5,6 +5,7 @@ public class Product {
     private String name;
     private Double value_sale;
     private int status;
+    private int amount;
 
     public Product() {
     }
@@ -39,6 +40,14 @@ public class Product {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
 }

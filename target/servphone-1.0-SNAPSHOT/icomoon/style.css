@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?sgnd89');
-  src:  url('fonts/icomoon.eot?sgnd89#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?sgnd89') format('truetype'),
-    url('fonts/icomoon.woff?sgnd89') format('woff'),
-    url('fonts/icomoon.svg?sgnd89#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?20alcc');
+  src:  url('fonts/icomoon.eot?20alcc#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?20alcc') format('truetype'),
+    url('fonts/icomoon.woff?20alcc') format('woff'),
+    url('fonts/icomoon.svg?20alcc#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -36,6 +36,9 @@
 }
 .icon-wrench:before {
   content: "\e991";
+}
+.icon-bin:before {
+  content: "\e9ac";
 }
 .icon-truck:before {
   content: "\e9b0";

@@ -2,6 +2,9 @@ package br.com.servphone.jdbc;
 
 import br.com.servphone.interfacejdbc.BudgetDAO;
 import br.com.servphone.model.Budget;
+import br.com.servphone.model.BudgetEdit;
+import br.com.servphone.model.Product;
+import br.com.servphone.model.Service;
 import org.apache.cxf.Bus;
 
 import java.sql.Connection;
@@ -100,6 +103,68 @@ public class JDBCBudgetDAO implements BudgetDAO {
             ex.printStackTrace();
         }
         return budgets;
+    }
+
+    @Override
+    public int update(BudgetEdit budgetEdit) {
+        try {
+            if (updateBudget(budgetEdit) > 0) {
+                for(Product products : budgetEdit.getProducts()){
+                    addProductBudget(products, budgetEdit.getId());
+                }
+                for(Service service : budgetEdit.getServices()){
+                    addServiceBudget(service, budgetEdit.getId());
+                }
+                    return 1;
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    private int updateBudget(BudgetEdit budgetEdit){
+        try{
+                    PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ?, defect = ?, description = ? where id = ?");
+            stmt.setInt(1, budgetEdit.getStatus());
+            stmt.setString(2, budgetEdit.getDefect());
+            stmt.setString(3, budgetEdit.getDescription());
+            stmt.setInt(4, budgetEdit.getId());
+            return stmt.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    private int addServiceBudget(Service service, int id) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO tb_budget_has_tb_service (tb_budget_id, tb_service_id, name, price_hours, amount_hours) VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, id);
+            stmt.setInt(2, service.getId());
+            stmt.setString(3, service.getName());
+            stmt.setDouble(4, service.getPriceHours());
+            stmt.setDouble(5, service.getAmountHours());
+            return stmt.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    private int addProductBudget(Product product, int id) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO tb_budget_has_tb_product (tb_budget_id, tb_product_id, name, price_value, amount) VALUES (?, ?, ?, ?, ?)");
+            stmt.setInt(1, id);
+            stmt.setInt(2, product.getId());
+            stmt.setString(3, product.getName());
+            stmt.setDouble(4, product.getValueSale());
+            stmt.setInt(5, product.getAmount());
+            return stmt.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 
 

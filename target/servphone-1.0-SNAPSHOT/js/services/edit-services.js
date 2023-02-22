@@ -37,7 +37,7 @@ function updateService() {
 		var service = new Object();
 		service.id = new URLSearchParams(window.location.search).get('id')
 		service.name = document.getElementById("inputName").value
-		service.priceHours = document.getElementById("inputPrice").value
+		service.price_hours = document.getElementById("inputPrice").value
 		service.status = document.getElementById("selectStatus").value
 		setUpdateService(service)
 	}
@@ -47,7 +47,7 @@ function updateService() {
 function setValueService(service) {
 	document.getElementById("title").innerHTML = `Serviço: ${service.name}`
 	document.getElementById("inputName").value = service.name
-	document.getElementById("inputPrice").value = service.priceHours
+	document.getElementById("inputPrice").value = service.price_hours
 	let status = 0;
 	if(service.status){
 		status = 1

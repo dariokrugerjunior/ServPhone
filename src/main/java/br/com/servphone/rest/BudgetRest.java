@@ -3,9 +3,11 @@ package br.com.servphone.rest;
 import br.com.servphone.bd.ConnectionDB;
 import br.com.servphone.jdbc.JDBCBudgetDAO;
 import br.com.servphone.model.Budget;
+import br.com.servphone.model.BudgetEdit;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -63,7 +65,7 @@ public class BudgetRest extends UtilRest{
             Connection connection = connectionDB.openConnection();
             JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
             return jdbcBudgetDAO.updateStatus(budget.getId(), budget.getStatus());
-        } catch (Exception ex) {
+        } catch (Exception ex) {    
             ex.printStackTrace();
         }
             return 0;
@@ -89,7 +91,7 @@ public class BudgetRest extends UtilRest{
     @GET
     @Path("/get-by-id")
     @Consumes("application/*")
-    public Budget getById(@QueryParam("id") int id){
+    public Budget getById(@QueryParam("id") int id) {
         Budget budget = new Budget();
         try {
             ConnectionDB connectionDB = new ConnectionDB();
@@ -101,5 +103,21 @@ public class BudgetRest extends UtilRest{
             ex.printStackTrace();
         }
         return budget;
+    }
+
+    @PUT
+    @Path("/update")
+    @Consumes("application/*")
+    public int update(String budgetEditParam) {
+        try {
+            BudgetEdit budgetEdit = new Gson().fromJson(budgetEditParam, BudgetEdit.class);
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
+            return jdbcBudgetDAO.update(budgetEdit);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 }

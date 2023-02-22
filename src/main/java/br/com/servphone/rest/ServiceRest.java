@@ -61,7 +61,7 @@ public class ServiceRest extends UtilRest {
         try {
             Service service = new Gson().fromJson(serviceParam, Service.class);
             ConnectionDB connectionDB = new ConnectionDB();
-            Connection connection = connectionDB.openConnection();
+            Connection connection = connectionDB.openConnection ();
             JDBCServiceDAO jdbcServiceDAO = new JDBCServiceDAO(connection);
             int result = jdbcServiceDAO.updateService(service);
             connectionDB.closeConnection();

@@ -25,18 +25,18 @@
         <div style="padding-top: 60px;">
             <div class="form-view">
                 <div class="title">
-                    <h1 class="title"></h1>
+                    <h1 id="title"></h1>
                     <div class="options">
-                        <a href="">
-                            <button class="navbar-toggler custom-toggler icon-whats" type="button">
-                                <i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" onclick="goToWhatsApp(   )"></i>
-                            </button>
-                        </a>
+                        <div class="div-icon">
+                            <i class="icon-whatsapp" data-toggle="tooltip" data-placement="top"
+                                onclick="goToWhatsApp()"></i>
+                        </div>
                         <div class="form-floating">
-                            <select class="form-select" id="statusSelect" aria-label="Floating label select example"></select>
+                            <select class="form-select" id="statusSelect"
+                                aria-label="Floating label select example"></select>
                             <label for="statusSelect">Status do Orçamento</label>
                         </div>
-                    </div>               
+                    </div>
                 </div>
                 <form id="form">
                     <div class="details-budget">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="column w-auto p-3">
-                            <label for="inputPasswordProduct" class="col-sm-2 col-form-label">Senha do Produto</label>
+                            <label for="inputPasswordProduct" class="col-sm-2 col-form-label">Senha</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="inputPasswordProduct" disabled>
                             </div>
@@ -77,14 +77,16 @@
                             <textarea class="form-control" id="inputDescription" rows="3"></textarea>
                         </div>
                     </div>
-                    <div class="d-flex buttons">
-                        <p style="padding-left: 1rem;">
-                            <a class="btn btn-primary button-add" data-bs-toggle="collapse" href="#addProductCard" role="button">
+                    <div class="add-value">
+                        <p>
+                            <a id="add-product" class="btn btn-primary button-add" data-bs-toggle="collapse"
+                                href="#addProductCard" role="button" onclick="openModalAdd('product')">
                                 Adicionar Produtos
                             </a>
                         </p>
-                        <p style="padding-left: 1rem;">
-                            <a class="btn btn-primary button-add" data-bs-toggle="collapse" href="#addServiceCard" role="button">
+                        <p>
+                            <a id="add-service" class="btn btn-primary button-add" data-bs-toggle="collapse"
+                                href="#addServiceCard" role="button" onclick="openModalAdd('service')">
                                 Adicionar Serviços
                             </a>
                         </p>
@@ -94,17 +96,18 @@
                         <div class="card card-body card-product-add">
                             <h3>Produto</h3>
                             <div class="w-100 p-3">
-                                <label for="inputCod" class="form-label">Codigo</label>
-                                <input type="text" class="form-control" id="inputCod">
+                                <label for="productSelect" class="form-label">Nome</label>
+                                <select class="form-select" id="productSelect"
+                                    aria-label="Floating label select example"></select>
                             </div>
                             <div class="w-auto p-3">
                                 <label for="inputAmount" class="form-label">Quantidade</label>
                                 <input type="text" class="form-control" id="inputAmount">
                             </div>
 
-                            <div class="w-auto p-3">    
+                            <div class="w-auto p-3">
                                 <label for="buttonAction" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="buttonAction">
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction" onclick="confirmAddValues('product')">
                                     Adicionar
                                 </a>
                             </div>
@@ -115,24 +118,25 @@
                         <div class="card card-body card-product-add">
                             <h3>Serviço</h3>
                             <div class="w-100 p-3">
-                                <label for="inputCod" class="form-label">Codigo</label>
-                                <input type="text" class="form-control" id="inputCod">
+                                <label for="serviceSelect" class="form-label">Nome</label>
+                                <select class="form-select" id="serviceSelect"
+                                    aria-label="Floating label select example"></select>
                             </div>
                             <div class="w-auto p-3">
-                                <label for="inputAmountHours" class="form-label">Quantidade de Horas</label>
+                                <label for="inputAmountHours" class="form-label">Qnt de Horas</label>
                                 <input type="text" class="form-control" id="inputAmountHours">
                             </div>
 
-                            <div class="w-auto p-3">   
+                            <div class="w-auto p-3">
                                 <label for="buttonAction" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="buttonAction">
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction" onclick="confirmAddValues('service')">
                                     Adicionar
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="table-responsive-sm" style="padding-left: 1rem; padding-right: 1rem;">
+                    <div class="table-responsive-sm">
                         <h2>Produtos</h2>
                         <table class="table table-bordered border-primary">
                             <thead>
@@ -141,26 +145,15 @@
                                     <th scope="col">Nome</th>
                                     <th scope="col">Valor</th>
                                     <th scope="col">Quantidade</th>
+                                    <th scope="col">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
+                            <tbody id="table-product">
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="table-responsive-sm" style="padding-left: 1rem; padding-right: 1rem;">
+                    <div class="table-responsive-sm">
                         <h2>Serviços</h2>
                         <table class="table table-bordered border-primary">
                             <thead>
@@ -168,41 +161,66 @@
                                     <th scope="col">Cod</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Valor-Hora</th>
-                                    <th scope="col">Quantidade</th>
+                                    <th scope="col">Quantidade de Horas</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
+                            <tbody id="table-service">
                             </tbody>
                         </table>
                     </div>
 
                     <div class="button-option">
-                        <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-                        <button type='reset' class="btn btn-danger btn-sm" value='Reset' name='reset' onclick="return resetForm()"
-                            class="btn btn-danger">Limpar</button>
+                        <button type="button" onclick="updateBudget()" class="btn btn-primary">Salvar</button>
+                        <a href="budget.html">
+                            <button type='button' class="btn btn-danger">Cancelar</button>
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="body-content"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="budget.html">
+                        <button type="button" class="btn btn-primary">
+                            Voltar para tela de Orçamentos
+                        </button>   
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer></footer>
 </body>
 
 </html>
 
 <style>
+    .div-icon {
+        width: 20rem;
+        height: 4rem;
+        display: flex;
+        flex-direction: row;
+        align-content: flex-start;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .icon-whatsapp {
+        font-size: 2rem;
+    }
+
+
     .details-budget {
         display: flex;
         flex-direction: row;
@@ -234,15 +252,18 @@
         justify-content: space-between;
     }
 
-    .icon-whats {
-        padding-right: 22rem;
-    }
-
     .options {
         display: flex;
         align-items: center;
         width: 39rem;
         max-width: 39rem;
+    }
+
+    .add-value {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
     }
 
 
@@ -277,20 +298,30 @@
 
         .options {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
             width: 19rem;
-             max-width: 19rem;
+            max-width: 19rem;
             justify-content: space-between;
         }
 
-        .button-add{
-            width: 20rem;
+        .button-add {
+            width: 16rem;
             max-width: 20rem;
         }
 
         .buttons {
             flex-direction: column;
+        }
+
+        .icon-whatsapp {
+            font-size: 2rem;
+        }
+
+        .add-value {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
     }

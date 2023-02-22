@@ -4,8 +4,10 @@ public class Service {
 
     private int id;
     private String name;
-    private Double priceHours;
+    private Double price_hours;
     private int status;
+
+    private int amount_hours;
 
     public Service() {
     }
@@ -34,9 +36,13 @@ public class Service {
         this.status = status;
     }
 
-    public Double getPriceHours() { return priceHours; }
+    public Double getPriceHours() { return price_hours; }
 
-    public void setPriceHours(Double priceHours) { this.priceHours = priceHours; }
+    public void setPriceHours(Double price_hours) { this.price_hours = price_hours; }
+
+    public int getAmountHours() { return amount_hours; }
+
+    public void setAmountHours(int amount_hours) { this.amount_hours = amount_hours; }
 
 
 
