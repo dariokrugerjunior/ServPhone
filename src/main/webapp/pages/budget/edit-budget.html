@@ -32,9 +32,7 @@
                                 onclick="goToWhatsApp()"></i>
                         </div>
                         <div class="form-floating">
-                            <select class="form-select" id="statusSelect"
-                                aria-label="Floating label select example"></select>
-                            <label for="statusSelect">Status do Orçamento</label>
+                            <h6 id="statusSelect"></h6>
                         </div>
                     </div>
                 </div>
@@ -78,7 +76,7 @@
                         </div>
                     </div>
                     <div class="add-value">
-                        <p>
+                        <p id="teste">
                             <a id="add-product" class="btn btn-primary button-add" data-bs-toggle="collapse"
                                 href="#addProductCard" role="button" onclick="openModalAdd('product')">
                                 Adicionar Produtos
@@ -162,6 +160,7 @@
                                     <th scope="col">Nome</th>
                                     <th scope="col">Valor-Hora</th>
                                     <th scope="col">Quantidade de Horas</th>
+                                    <th scope="col">Ação</th>
                                 </tr>
                             </thead>
                             <tbody id="table-service">

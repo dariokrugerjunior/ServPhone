@@ -1,11 +1,11 @@
 var Budget = new Object();
 var Products = [];
 var Services = [];
+var editable = true;
 
 $(document).ready(function () {
 	$("header").load("../../pages/menu/header.html");
 	getById()
-	setSelectOption()
 	getProducts()
 	getServices()
 });
@@ -18,6 +18,8 @@ function getById() {
 		data: `id=${new URLSearchParams(window.location.search).get('id')}`
 	}).then((response) => {
 		setBudgetsTable(response)
+		getProductByBudgetId(response.id)
+		getServiceByBudgetId(response.id)
 	}).catch((error) => {
 		actionModal("Erro", `Erro ao buscar esse orçamento: ${error.responseText}`)
 	})
@@ -77,8 +79,13 @@ function setBudgetsTable(budget) {
 	Budget.password_product = budget.password_product
 	Budget.defect = budget.defect
 	Budget.description = budget.description
+	Budget.status = budget.status
+
+	editableBudget(budget.status)
+
 	
 	document.getElementById("title").innerHTML = `Código orçamento: ${budget.id}`
+	document.getElementById('statusSelect').innerHTML = `Status: ${setBudgetStatus(budget.status)}`
 	document.getElementById("inputClient").value = budget.name
 	document.getElementById("inputModel").value = budget.model
 	document.getElementById("inputBrand").value = budget.brand
@@ -87,19 +94,41 @@ function setBudgetsTable(budget) {
 	document.getElementById("inputDescription").value = budget.description
 }
 
-function setSelectOption() {
-	var optionStatus = []
-	if (sessionStorage.getItem('role') == 1) {
-		optionStatus.push({ label: 'Aguardando Aviso para o Cliente', value: 9 })
-		optionStatus.push({ label: 'Aguardando Peça', value: 8 })
-		optionStatus.push({ label: 'Em Análise Técnico', value: 1 })
+function editableBudget (status) {
+	role = sessionStorage.getItem('role')
+	if ([2, 3, 5, 6, 7, 9, 10, 11, 12, 13].includes(status)) {
+		editable = false
+		disableEditableHtml()
+	} else if ([1, 4].includes(status) && role === 0) {
+		editable = false
+		disableEditableHtml()
 	}
+}
 
-	const selectOp = document.getElementById('statusSelect');
-	optionStatus.forEach((element, key) => {
-		selectOp[key] = new Option(element.label, element.value, false, false);
-	})
-	document.getElementById('statusSelect').value = new URLSearchParams(window.location.search).get('status')
+function disableEditableHtml () {
+	document.getElementById("inputDefect").disabled = true
+	document.getElementById("inputDescription").disabled = true
+	document.getElementById("teste").style.visibility = "hidden"
+	document.getElementById("add-service").style.visibility = "hidden"
+}
+
+
+function setBudgetStatus(statusCode) {
+	switch (statusCode) {
+		case 2: return 'Aguardando Atendente'
+		case 9: return 'Aguardando Aviso para o Cliente'
+		case 8: return 'Aguardando Peça'
+		case 4: return 'Aguardando Manutenção'
+		case 3: return 'Aguardando Resposta do Cliente'
+		case 10: return 'Aguardando Retirada com Pagamento'
+		case 6: return 'Aguardando Retirada do Aparelho'
+		case 1: return 'Em Análise Técnico'
+		case 5: return 'Em Manutenção'
+		case 13: return 'Concluido - Aguardando Aviso para Cliente'
+		case 11: return 'Concluido/Em Garantia'
+		case 12: return 'Orçamento Finalizado'
+		case 7: return 'Orçamento Não Realizado'
+	}
 }
 
 function goToWhatsApp() {
@@ -190,7 +219,7 @@ function setTableProduct(product){
 	newProduct.name = product.name
 	newProduct.status = product.status
 	newProduct.value_sale = product.valueSale
-	newProduct.amount = document.getElementById("inputAmount").value
+	newProduct.amount = product.amount ? product.amount : document.getElementById("inputAmount").value
 
 	if (Products.length == 0 || !Products?.map((x) => x?.id === newProduct.id).includes(true)) {
 		Products.push(newProduct)
@@ -230,7 +259,7 @@ function refreshProductTable() {
 			<td>${product.amount}</td>
 			<td class="column-action">
 				<div class="d-flex justify-content-evenly">
-				<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Remover" class="icon-bin" onclick="removeProduct(${product.id})"></i>
+				<i style="cursor:pointer; ${!editable ? 'pointer-events: none;' : ''}" data-toggle="tooltip" data-placement="top" title="Remover" class="icon-bin" onclick="removeProduct(${product.id})"></i>
 				</div>
 			</td>
 		</tr>`
@@ -239,13 +268,14 @@ function refreshProductTable() {
 }
 
 function setTableService(service){
+	console.log('SETTABLE', service)
 	document.getElementById("table-service").innerHTML = ''
 	var newService = Object();
 	newService.id = service.id
 	newService.name = service.name
 	newService.status = service.status
 	newService.price_hours = service.priceHours
-	newService.amount_hours = document.getElementById("inputAmountHours").value
+	newService.amount_hours = service.amountHours ? service.amountHours : document.getElementById("inputAmountHours").value
 	if (Services.length == 0 || !Services?.map((x) => x?.id === newService.id).includes(true)) {
 		Services.push(newService)
 	} else {
@@ -263,6 +293,7 @@ function refreshServiceTable() {
 	Services.sort(function (a, b) {
 		return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	}).forEach((service, x) => {
+		console.log(service, 'service')
 		let rowTable =
 			`<tr> 
 			<th scope="row">${service.id}</th>
@@ -271,7 +302,7 @@ function refreshServiceTable() {
 			<td>${service.amount_hours}</td>
 			<td class="column-action">
 				<div class="d-flex justify-content-evenly">
-				<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Remover" class="icon-bin" onclick="removeService(${service.id})"></i>
+				<i style="cursor:pointer; ${!editable ? 'pointer-events: none;' : ''}" data-toggle="tooltip" data-placement="top" title="Remover" class="icon-bin" onclick="removeService(${service.id})"></i>
 				</div>
 			</td>
 		</tr>`
@@ -358,6 +389,28 @@ function updateStatus(id, status) {
 	}).then((response) => {
 	}).catch((error) => {
 		actionModal('Erro', 'Erro ao critico ao atualizar status, acionar os administradores')
+	})
+}
+
+function getProductByBudgetId(id) {
+	$.ajax({
+		type: "GET",
+		url: "/servphone_war_exploded/servphone/rest/product/product-budget",
+		data: `id=${id}`
+	}).then((response) => {
+		response.forEach((product) => setTableProduct(product))
+	}).catch((error) => {
+	})
+}
+
+function getServiceByBudgetId(id) {
+	$.ajax({
+		type: "GET",
+		url: "/servphone_war_exploded/servphone/rest/service/service-budget",
+		data: `id=${id}`
+	}).then((response) => {
+		response.forEach((service) => setTableService(service))
+	}).catch((error) => {
 	})
 }
 

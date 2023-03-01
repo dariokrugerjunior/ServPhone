@@ -112,4 +112,22 @@ public class ProductRest extends UtilRest {
         return products;
     }
 
+    @GET
+    @Path("/product-budget")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getProductByBudgetId(@QueryParam("id") int id) {
+        List<Product> products = new ArrayList<>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCProductDAO jdbcProductDAO = new JDBCProductDAO(connection);
+            products = jdbcProductDAO.getProductByBudgetId(id);
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
 }

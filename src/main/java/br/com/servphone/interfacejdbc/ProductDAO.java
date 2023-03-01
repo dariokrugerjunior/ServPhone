@@ -16,4 +16,6 @@ public interface ProductDAO {
 
     public List<Product> getProductActive();
 
+    public List<Product> getProductByBudgetId(int id);
+
 }

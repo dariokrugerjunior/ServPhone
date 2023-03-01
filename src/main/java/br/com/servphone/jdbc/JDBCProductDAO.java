@@ -101,6 +101,22 @@ public class JDBCProductDAO implements ProductDAO {
         return products;
     }
 
+    @Override
+    public List<Product> getProductByBudgetId(int id) {
+        List<Product> products = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            String query = String.format("SELECT tp.id, tp.name, tbhtp.price_value, tbhtp.amount FROM tb_product tp, tb_budget_has_tb_product tbhtp WHERE tbhtp.tb_budget_id = %s AND tp.id = tbhtp.tb_product_id", id);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                products.add(addValueProductBudget(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
     private Product addValueProduct(ResultSet rs) {
         Product product = new Product();
         try {
@@ -108,6 +124,20 @@ public class JDBCProductDAO implements ProductDAO {
             product.setName(rs.getString("name"));
             product.setValueSale(rs.getDouble("value_sale"));
             product.setStatus(rs.getInt("status"));
+            product.setAmount(rs.getInt("amount"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return product;
+    }
+
+    private Product addValueProductBudget(ResultSet rs) {
+        Product product = new Product();
+        try {
+            product.setId(rs.getInt("id"));
+            product.setName(rs.getString("name"));
+            product.setValueSale(rs.getDouble("price_value"));
+            product.setAmount(rs.getInt("amount"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

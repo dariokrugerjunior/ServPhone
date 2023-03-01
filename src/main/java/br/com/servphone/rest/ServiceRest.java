@@ -1,9 +1,7 @@
 package br.com.servphone.rest;
 
 import br.com.servphone.bd.ConnectionDB;
-import br.com.servphone.jdbc.JDBCProductDAO;
 import br.com.servphone.jdbc.JDBCServiceDAO;
-import br.com.servphone.model.Product;
 import br.com.servphone.model.Service;
 import com.google.gson.Gson;
 
@@ -112,6 +110,26 @@ public class ServiceRest extends UtilRest {
         }
         return services;
     }
+
+    @GET
+    @Path("/service-budget")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Service> getProductByServiceId(@QueryParam("id") int id) {
+        List<Service> services = new ArrayList<>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCServiceDAO jdbcServiceDAO = new JDBCServiceDAO(connection);
+            services = jdbcServiceDAO.getServiceByBudgetId(id);
+            connectionDB.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return services;
+    }
+
+
 
 
 }

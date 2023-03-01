@@ -10,6 +10,7 @@ public interface ServiceDAO {
     public int updateService(Service service);
     public int registerService(Service service);
     public List<Service> getServicesActive();
+    public List<Service> getServiceByBudgetId(int id);
 
 
 

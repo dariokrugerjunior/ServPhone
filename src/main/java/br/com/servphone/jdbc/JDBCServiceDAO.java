@@ -100,6 +100,22 @@ public class JDBCServiceDAO implements ServiceDAO {
         return services;
     }
 
+    @Override
+    public List<Service> getServiceByBudgetId(int id) {
+        List<Service> services = new ArrayList<>();
+        try {
+            Statement stmt = connection.createStatement();
+            String query = String.format("SELECT ts.id, ts.name, tbhts.price_hours, tbhts.amount_hours FROM tb_service ts, tb_budget_has_tb_service tbhts WHERE tbhts.tb_budget_id = %s AND ts.id = tbhts.tb_service_id", id);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                services.add(addValueBudgetService(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return services;
+    }
+
     private Service addValueService(ResultSet rs) {
         Service service = new Service();
         try {
@@ -107,6 +123,19 @@ public class JDBCServiceDAO implements ServiceDAO {
             service.setName(rs.getString("name"));
             service.setStatus(rs.getInt("status"));
             service.setPriceHours(rs.getDouble("price_hours"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return service;
+    }
+
+    private Service addValueBudgetService(ResultSet rs) {
+        Service service = new Service();
+        try {
+            service.setId(rs.getInt("id"));
+            service.setName(rs.getString("name"));
+            service.setPriceHours(rs.getDouble("price_hours"));
+            service.setAmountHours(rs.getInt("amount_hours"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

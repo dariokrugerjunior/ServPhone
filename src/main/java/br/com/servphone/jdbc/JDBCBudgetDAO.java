@@ -125,7 +125,7 @@ public class JDBCBudgetDAO implements BudgetDAO {
 
     private int updateBudget(BudgetEdit budgetEdit){
         try{
-                    PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ?, defect = ?, description = ? where id = ?");
+            PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ?, defect = ?, description = ? where id = ?");
             stmt.setInt(1, budgetEdit.getStatus());
             stmt.setString(2, budgetEdit.getDefect());
             stmt.setString(3, budgetEdit.getDescription());
