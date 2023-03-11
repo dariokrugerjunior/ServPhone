@@ -1,3 +1,6 @@
+let statusBudget;
+let employeeTec = sessionStorage.getItem('role') === 0
+
 $(document).ready(function () {
 	$("header").load("../../pages/menu/header.html");
 	setSelectValue();
@@ -80,37 +83,49 @@ function setBudgetStatus(statusCode) {
 	}
 }
 
+// function setBudgetActio2n(budget) {
+// 	switch (budget.status) {
+// 		case 1: return sessionStorage.getItem('role') == 0 ? `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
+// 			: `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
+// 		case 2: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-hour-glass" onclick="updateStatus(${budget.id}, 9)"></i>`
+// 		case 3: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i> 
+// 						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
+// 		case 4: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i class="icon-hour-glass"></i> ${sessionStorage.getItem('role') == 1 ? `<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 5)"></i>` : ''}`
+// 		case 5: return `<i	 style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						${sessionStorage.getItem('role') == 1 ? `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i> <i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>` : ''}`
+// 		case 6: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 7)"></i>`
+// 		case 7: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
+// 		case 8: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i>
+// 						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
+// 		case 9: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}" onclick="goToWhatsApp(${budget.phone})"></i>
+// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 3)"></i>`
+// 		case 10: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-coin-dollar" data-toggle="tooltip" data-placement="top" title="Pagamento" onclick="window.location.assign('')"></i>`
+// 		case 11: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
+// 		case 12: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
+// 		case 13: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+// 						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}"  onclick="goToWhatsApp(${budget.phone})"></i>
+// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>`
+// 	}
+// }
+
 function setBudgetAction(budget) {
-	switch (budget.status) {
-		case 1: return sessionStorage.getItem('role') == 0 ? `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>` 
-						: `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-		case 2: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-hour-glass" onclick="updateStatus(${budget.id}, 9)"></i>`
-		case 3: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i> 
-						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
-		case 4: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i class="icon-hour-glass"></i> ${sessionStorage.getItem('role') == 1 ? `<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 5)"></i>` : ''}`
-		case 5: return `<i	 style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						${sessionStorage.getItem('role') == 1 ? `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i> <i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>` : ''}`
-		case 6: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 7)"></i>`
-		case 7: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-		case 8: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i>
-						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
-		case 9: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}" onclick="goToWhatsApp(${budget.phone})"></i>
-						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 3)"></i>`
-		case 10: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-coin-dollar" data-toggle="tooltip" data-placement="top" title="Pagamento" onclick="window.location.assign('')"></i>`
-		case 11: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-		case 12: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-		case 13: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}"  onclick="goToWhatsApp(${budget.phone})"></i>
-						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>`
-	}
+	console.log([8, 4, 1, 5].includes(budget.status) && employeeTec)
+	console.log()
+	return `
+		<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
+		<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}" onclick="goToWhatsApp(${budget.phone})"></i>
+		<i class="icon-pencil" style="${[2, 9, 8, 3, 10, 6, 5, 13, 11, 12, 7].includes(budget.status) && !employeeTec === true ? 'cursor:pointer"' : [8, 4, 1, 5].includes(budget.status) && employeeTec === true ? 'cursor:pointer' : ''}  onclick="modalEdit(${budget.status})"></i>
+		`;
 }
+
+
 
 function goToWhatsApp(phone) {
 	window.location = `https://api.whatsapp.com/send?phone=${phone}`
@@ -148,6 +163,21 @@ function actionModal(title, message) {
 	myModal.show()
 }
 
+function modalEdit(status) {
+	statusBudget = status
+	var myModal = new bootstrap.Modal(document.getElementById('myModalEdit'), {
+		keyboard: false,
+	})
+	myModal
+	$("#edit-body-content").html(`<h8>Status do orçamento atual: ${setBudgetStatus(status)}</h8>
+	<select class="form-select" aria-label="Default select example" id="statusSelect"></select>
+	`)
+	$("#myModalEditLabel").html('Deseja alterar o Status do Orçamento ?')
+	setSelectOption(status)
+	myModal.show()
+}
+
+
 
 function changeAction(event) {
 	if (event == 14) {
@@ -184,5 +214,26 @@ function searchClient() {
 			li[i].style.display = "none";
 		}
 	}
+}
+
+function editStatusConfirm() {
+	updateStatus(statusBudget, document.getElementById('statusSelect').value)
+
+}
+
+function setSelectOption(statusActual) {
+	var optionStatus = []
+	count = 1;
+	console.log(employeeTec)
+	while (count < 13) {
+		optionStatus.push({ label: setBudgetStatus(count), value: count })
+		count++
+	}
+
+	const selectOp = document.getElementById('statusSelect');
+	optionStatus.forEach((element) => {
+		selectOp[element.value] = new Option(element.label, element.value, false, false);
+	})
+	document.getElementById('statusSelect').value = statusActual
 }
 
