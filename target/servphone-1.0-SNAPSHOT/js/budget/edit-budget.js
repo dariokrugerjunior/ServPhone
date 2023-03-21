@@ -83,7 +83,7 @@ function setBudgetsTable(budget) {
 
 	editableBudget(budget.status)
 
-	
+
 	document.getElementById("title").innerHTML = `Código orçamento: ${budget.id}`
 	document.getElementById('statusSelect').innerHTML = `Status: ${setBudgetStatus(budget.status)}`
 	document.getElementById("inputClient").value = budget.name
@@ -94,18 +94,19 @@ function setBudgetsTable(budget) {
 	document.getElementById("inputDescription").value = budget.description
 }
 
-function editableBudget (status) {
+function editableBudget(status) {
 	role = sessionStorage.getItem('role')
-	if ([2, 3, 5, 6, 7, 9, 10, 11, 12, 13].includes(status)) {
+	console.log(role)
+	if ([2, 3, 6, 7, 9, 10, 11, 12, 13].includes(status)) {
 		editable = false
 		disableEditableHtml()
-	} else if ([1, 4].includes(status) && role === 0) {
+	} else if ([1, 4, 5].includes(status) && role == 0) {
 		editable = false
 		disableEditableHtml()
 	}
 }
 
-function disableEditableHtml () {
+function disableEditableHtml() {
 	document.getElementById("inputDefect").disabled = true
 	document.getElementById("inputDescription").disabled = true
 	document.getElementById("teste").style.visibility = "hidden"
@@ -137,7 +138,7 @@ function goToWhatsApp() {
 
 function openModalAdd(type) {
 	if (type == 'product') {
-		if(!$("#addServiceCard").is(':hidden')){
+		if (!$("#addServiceCard").is(':hidden')) {
 			document.getElementById(`add-service`).click()
 		}
 	}
@@ -152,7 +153,7 @@ function openModalAdd(type) {
 function setSelectProductsOptions(products) {
 	var optionProducts = []
 	products.forEach((product) => {
-		optionProducts.push({label: product.name, value: product.id})
+		optionProducts.push({ label: product.name, value: product.id })
 	})
 
 	const selectOp = document.getElementById('productSelect');
@@ -164,7 +165,7 @@ function setSelectProductsOptions(products) {
 function setSelectServicesOptions(services) {
 	var optionServices = []
 	services.forEach((service) => {
-		optionServices.push({label: service.name, value: service.id})
+		optionServices.push({ label: service.name, value: service.id })
 	})
 
 	const selectOp = document.getElementById('serviceSelect');
@@ -201,8 +202,8 @@ function validateInputsModal() {
 	return true
 }
 
-function confirmAddValues(type){
-	if(validateInputsModal()) {
+function confirmAddValues(type) {
+	if (validateInputsModal()) {
 		if (type == 'product') {
 			getProductById(document.getElementById('productSelect').value)
 		} else if (type == 'service') {
@@ -212,7 +213,7 @@ function confirmAddValues(type){
 }
 
 
-function setTableProduct(product){
+function setTableProduct(product) {
 	document.getElementById("table-product").innerHTML = ''
 	var newProduct = new Object()
 	newProduct.id = product.id
@@ -225,7 +226,7 @@ function setTableProduct(product){
 		Products.push(newProduct)
 	} else {
 		Products.forEach((x) => {
-			if(x.id == newProduct.id){
+			if (x.id == newProduct.id) {
 				x.amount = parseInt(x.amount) + parseInt(document.getElementById("inputAmount").value)
 			}
 		})
@@ -237,8 +238,8 @@ function removeProduct(id) {
 	Products = Products
 	var newProducts = [];
 	Products.forEach((x) => {
-		if (x.id === id){
-		}else {
+		if (x.id === id) {
+		} else {
 			newProducts.push(x)
 		}
 	})
@@ -255,7 +256,7 @@ function refreshProductTable() {
 			`<tr> 
 			<th scope="row">${product.id}</th>
 			<td class="name">${product.name}</td>
-			<td>${product.value_sale.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+			<td>${product.value_sale.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
 			<td>${product.amount}</td>
 			<td class="column-action">
 				<div class="d-flex justify-content-evenly">
@@ -267,7 +268,7 @@ function refreshProductTable() {
 	});
 }
 
-function setTableService(service){
+function setTableService(service) {
 	console.log('SETTABLE', service)
 	document.getElementById("table-service").innerHTML = ''
 	var newService = Object();
@@ -280,7 +281,7 @@ function setTableService(service){
 		Services.push(newService)
 	} else {
 		Services.forEach((x) => {
-			if(x.id == newService.id){
+			if (x.id == newService.id) {
 				x.amount_hours = parseInt(x.amount_hours) + parseInt(document.getElementById("inputAmountHours").value)
 			}
 		})
@@ -298,7 +299,7 @@ function refreshServiceTable() {
 			`<tr> 
 			<th scope="row">${service.id}</th>
 			<td class="name">${service.name}</td>
-			<td>${service.price_hours.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
+			<td>${service.price_hours.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</td>
 			<td>${service.amount_hours}</td>
 			<td class="column-action">
 				<div class="d-flex justify-content-evenly">
@@ -314,8 +315,8 @@ function removeService(id) {
 	Services = Services
 	var newServices = [];
 	Services.forEach((x) => {
-		if (x.id === id){
-		}else {
+		if (x.id === id) {
+		} else {
 			newServices.push(x)
 		}
 	})
@@ -325,31 +326,41 @@ function removeService(id) {
 
 
 function updateBudget() {
-	if(validateInputsBudget()) {
+	if (validateInputsBudget()) {
 		var budget = new Object();
 		budget.id = new URLSearchParams(window.location.search).get('id')
-		budget.status = document.getElementById('statusSelect').value
+		if (Budget.status == 5) {
+			budget.status = 9	
+		} else {
+			budget.status = document.getElementById('statusSelect').value
+		}
 		budget.defect = document.getElementById('inputDefect').value
 		budget.description = document.getElementById('inputDescription').value
 		budget.products = Products
 		budget.services = Services
 		setUpdateBudget(budget)
 	}
-	
+
 }
 
 function validateInputsBudget() {
+
+	if (!editable) {
+		actionModal("Aviso!", "Você não pode editar esse orçamento no momento")
+		return false
+	}
+	
 	if (document.getElementById("inputDefect").value === '') {
 		actionModal("Aviso!", "Não é possivel atualizar o Orçamento com o campo DEFEITO vazio")
 		return false
 	}
-	
+
 	if (document.getElementById("inputDescription").value === '') {
 		actionModal("Aviso!", "Não é possivel atualizar o Orçamento com o campo DESCRIÇÃO vazio")
-		return false	
+		return false
 	}
 
-	if (Services.length <= 0){
+	if (Services.length <= 0) {
 		actionModal("Aviso!", "Não é possivel atualizar orçamento sem um Serviço")
 		return false
 	}
@@ -366,7 +377,7 @@ function setUpdateBudget(updateBudget) {
 		if (response > 0) {
 			updateStatus(updateBudget.id, 9)
 			actionModal("Sucesso", `Orçamento alterado com sucesso`)
-		}else {
+		} else {
 			actionModal("Erro", `Não foi possivel fazer no orçamento`)
 		}
 	}).catch((error) => {

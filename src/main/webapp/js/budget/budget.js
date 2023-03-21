@@ -1,5 +1,6 @@
 let statusBudget;
-let employeeTec = sessionStorage.getItem('role') === 1 //Funcionario for igual Técnico 
+let idBudget;
+let employeeTec = sessionStorage.getItem('role') == 1 //Funcionario for igual Técnico 
 
 $(document).ready(function () {
 	$("header").load("../../pages/menu/header.html");
@@ -117,20 +118,31 @@ function setBudget2Action(budget) {
 
 function setBudgetAction(budget) {
 	let activeIcon = false
-	if (sessionStorage.getItem('role') == 1 && [1 ,8].includes(budget.status)) {
-		activeIcon = true
-	} else if (sessionStorage.getItem('role') == 0 && budget.status == 8){
+	console.log(budget.status)
+	if (employeeTec && [1].includes(budget.status)) {
 		activeIcon = true
 	}
-	
 
-	console.log(budget.status, activeIcon)
+	let activeModalEdit = 'cursor:pointer;'
+	if (employeeTec && budget.status == 4 || employeeTec) {
+		activeModalEdit = 'cursor:pointer'
+	} else if (!employeeTec && budget.status == 4) {
+		activeModalEdit = 'cursor:default; pointer-events: none;'
+	} else if (budget.status == 8 || budget.status == 6) {
+		activeModalEdit = 'cursor:pointer'
+	} else if (!employeeTec && budget.status == 9 || !employeeTec && budget.status == 3) {
+		activeModalEdit = 'cursor:pointer'
+	}
+	else if (![1].includes(budget.status)) {
+		activeModalEdit = 'cursor:default; pointer-events: none;'
+	}
+
 	return `
 		<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
 		<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}" onclick="goToWhatsApp(${budget.phone})"></i>
-		<i class="icon-clipboard" style="${![1].includes(budget.status) ? 'cursor:pointer' : 'cursor:default;'}" onclick="${!activeIcon ? `modalEdit(${budget.status})`: ''}"></i>
-		<i class="icon-pencil" style="${activeIcon ? 'cursor:pointer' : 'cursor:default;'}" onclick="${activeIcon ? `window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')` : ''}"></i>
-		<i style="${budget.status == 10 ? 'cursor:pointer' : 'cursor:default;'}" class="icon-coin-dollar" data-toggle="tooltip" data-placement="top" title="Pagamento" onclick="window.location.assign('')"></i>
+		<i class="icon-clipboard" style="${activeModalEdit}" onclick="${!activeIcon ? `modalEdit(${budget.id}, ${budget.status})` : ''}"></i>
+		<i class="icon-pencil" style="${activeIcon ? 'cursor:pointer' : 'cursor:default; pointer-events: none;'}" onclick="${activeIcon ? `window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')` : ''}"></i>
+		<i style="${budget.status == 10 ? 'cursor:pointer' : 'cursor:default; pointer-events: none;'}" class="icon-coin-dollar" data-toggle="tooltip" data-placement="top" title="Pagamento" onclick="window.location.assign('../admin/cash/cash-payment.html?id=${budget.id}')"></i>
 		`;
 }
 
@@ -172,8 +184,10 @@ function actionModal(title, message) {
 	myModal.show()
 }
 
-function modalEdit(status) {
+function modalEdit(id, status) {
 	statusBudget = status
+	idBudget = id
+	console.log(statusBudget, idBudget)
 	var myModal = new bootstrap.Modal(document.getElementById('myModalEdit'), {
 		keyboard: false,
 	})
@@ -204,7 +218,7 @@ function getByStatus(status) {
 	}).then((response) => {
 		setBudgetsTable(response)
 	}).catch((error) => {
-		actionModal("Erro", `Erro ao buscar orçamentos: ${error.responseText}`)
+		actionModal("Erro", `Er	ro ao buscar orçamentos: ${error.responseText}`)
 	})
 }
 
@@ -226,7 +240,79 @@ function searchClient() {
 }
 
 function editStatusConfirm() {
-	updateStatus(statusBudget, document.getElementById('statusSelect').value)
+	const valueSelected = document.getElementById('statusSelect').value
+
+	// Quando o orçamento está esperando aviso para cliente
+	if (statusBudget === 9) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 3)  // Confirma que entrou em contato o cliente
+				break;
+			case '1': updateStatus(idBudget, 9) // Não avisou o cliente ainda
+				break;
+		}
+	}
+
+	// Quando o orçamento está esperando resposta do cliente
+	if (statusBudget === 3) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 4) // Confirma que o cliente quer fazer o serviço
+				break;
+			case '1': updateStatus(idBudget, 6) // Cliente não quer fazer o serviço
+				break;
+		}
+	}
+
+	// Quando o orçamento está aguarando a manutenção
+	if (statusBudget === 4) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 5) // Confirma que o tecico vai iniciar
+				break;
+			case '1': updateStatus(idBudget, 4) // Tecnico não inicou
+				break;
+			case '2': updateStatus(idBudget, 8) // Sem peça no estoque para executar
+				break;
+		}
+	}
+
+	// Quando o orçamento está aguardando a peça
+	if (statusBudget === 8) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 4) // Peça chegou
+				break;
+			case '1': updateStatus(idBudget, 8) // não chegou
+				break;
+			case '2': updateStatus(idBudget, 6) // cancelar orçamento
+				break;
+		}
+	}
+
+	// Quando esta esperando o cliente vir buscar o aparelho
+	if (statusBudget === 6) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 7) // Peça chegou
+				break;
+			case '1': updateStatus(idBudget, 6) // não buscou
+				break;
+		}
+	}
+
+	// Quando o orçamento foi concluido
+	if (statusBudget === 5) {
+		switch (valueSelected) {
+			case '0': updateStatus(idBudget, 10) // Terminou a manutenção
+				break;
+			case '1': updateStatus(idBudget, 5) // Não terminou ainda
+				break;
+		}
+	}
+
+
+
+
+
+
+
+	document.location.reload(true);
 
 }
 
@@ -234,13 +320,21 @@ function setSelectOption(statusActual) {
 	var optionStatus = []
 
 	optionStatus.push({ label: 'Confirmar', value: 0 })
-	optionStatus.push({ label: 'Cancelar', value: 1})
+	optionStatus.push({ label: 'Cancelar', value: 1 })
+
+	if (statusBudget == 4) {
+		optionStatus.push({ label: 'Aguardando Peça', value: 2 })
+	}
+
+	if (statusBudget == 8) {
+		optionStatus.push({ label: 'Cancelar Orçamento', value: 2 })
+	}
 
 	const selectOp = document.getElementById('statusSelect')
 	optionStatus.forEach((element) => {
 		console.log(element)
 		selectOp[element.value] = new Option(element.label, element.value, false, false);
 	})
-	document.getElementById('statusSelect').value = 0
+
 }
 

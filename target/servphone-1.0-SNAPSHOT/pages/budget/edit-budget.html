@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="button-option">
-                        <button :disabled="editable" type="button" onclick="updateBudget()" class="btn btn-primary">Salvar</button>
+                        <button :disabled="!editable" type="button" onclick="updateBudget()" class="btn btn-primary">Salvar</button>
                         <a href="budget.html">
                             <button type='button' class="btn btn-danger">Cancelar</button>
                         </a>
