@@ -8,6 +8,8 @@ import com.google.gson.Gson;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/cash-register")
 public class CashRegisterRest extends UtilRest {
@@ -47,6 +49,24 @@ public class CashRegisterRest extends UtilRest {
             ex.printStackTrace();
         }
         return cashRegister;
+    }
+
+    @GET
+    @Path("/get")
+    @Consumes("application/*")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CashRegister> getAll() {
+        List<CashRegister> cashRegisterList = new ArrayList<CashRegister>();
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCCashRegisterDAO jdbcCashRegisterDAO = new JDBCCashRegisterDAO(connection);
+            cashRegisterList = jdbcCashRegisterDAO.getAll();
+            connectionDB.closeConnection();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cashRegisterList;
     }
 
 }

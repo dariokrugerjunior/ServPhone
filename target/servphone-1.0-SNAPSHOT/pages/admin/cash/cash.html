@@ -8,10 +8,15 @@
     <meta name="author" content="Dario Kruger Junior">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caixa</title>
-    <link rel="stylesheet" type="text/css" href="">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/admin/cash/cash.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../icomoon/style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="">
+	<script src="../../../js/admin/cash/cash.js"></script>
 </head>
 
 <body>
@@ -24,7 +29,7 @@
                     <h1>Caixa</h1>
                     <a href=""class="cash-title">
                         <button class="navbar-toggler custom-toggler" type="button">
-                            <img src="/imgs/export-pdf.svg	" width="30" height="30">
+                            <img src="../../../imgs/export-pdf.svg	" width="30" height="30">
                         </button>
                     </a>
                 </div>
@@ -33,40 +38,38 @@
                 <thead>
                     <tr>
                         <th scope="col">Cod</th>
+                        <th scope="col">Cod Orçamento</th>
                         <th scope="col">Valor Total</th>
                         <th scope="col">Forma de Pagamento</th>
                         <th scope="col">Ação</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>R$ 200,00</td>
-                        <td>Dinheiro</td>
-                        <td>
-                            <a href="/pages/admin/cash/cash-view.html">
-                                <button class="navbar-toggler custom-toggler" type="button">
-                                    <img src="/imgs/view.svg" width="30" height="30">
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>R$ 200,00</td>
-                        <td>Credito</td>
-                        <td>
-                            <a href="/pages/admin/cash/cash-view.html">
-                                <button class="navbar-toggler custom-toggler" type="button">
-                                    <img src="/imgs/view.svg" width="30" height="30">
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
+                <tbody id="table-value" class="table-group-divider">
+                    
                 </tbody>
             </table>
         </div>
     </section>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="body-content"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="cash.html">
+                        <button type="button" class="btn btn-primary">
+                            Voltar para tela de Pagamentos
+                        </button>   
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     <footer></footer>
 </body>
 
@@ -101,6 +104,10 @@
         .cash-title{
             padding-right: 0rem; 
             padding-left: 0rem;
+        }
+
+        .column-action {
+            width: 8rem;
         }
 	}
 

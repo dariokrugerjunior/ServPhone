@@ -4,6 +4,8 @@ import br.com.servphone.interfacejdbc.CashRegisterDAO;
 import br.com.servphone.model.CashRegister;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JDBCCashRegisterDAO implements CashRegisterDAO {
 
@@ -51,6 +53,22 @@ public class JDBCCashRegisterDAO implements CashRegisterDAO {
             ex.printStackTrace();
         }
         return cashRegister;
+    }
+
+    @Override
+    public List<CashRegister> getAll() {
+        List<CashRegister> cashRegisterList = new ArrayList<CashRegister>();
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tb_cash_register");
+            if (rs.next()) {
+                cashRegisterList.add(addValueCashRegister(rs));
+            }
+
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cashRegisterList;
     }
 
     private CashRegister addValueCashRegister(ResultSet rs){
