@@ -26,7 +26,6 @@ function actionModal(title, message) {
 }
 
 function setCashTable(cashRegisterList) {
-	console.log(cashRegisterList)
 	document.getElementById("table-value").innerHTML = ''
 	cashRegisterList.sort(function (a, b) {
 		return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;

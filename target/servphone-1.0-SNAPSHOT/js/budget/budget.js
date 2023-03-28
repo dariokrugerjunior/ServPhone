@@ -25,7 +25,6 @@ function setBudgetsTable(listBudget) {
 	listBudget.sort(function (a, b) {
 		return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	}).forEach(budget => {
-		console.log(budget, 'budget')
 		let rowTable =
 			`<tr> 
 			<td scope="row">${budget.id}</td>
@@ -102,7 +101,6 @@ function setBudgetStatus(statusCode) {
 
 function setBudgetAction(budget) {
 	let activeIcon = false
-	console.log(budget.status)
 	if (employeeTec && [1].includes(budget.status)) {
 		activeIcon = true
 	}
@@ -171,7 +169,6 @@ function actionModal(title, message) {
 function modalEdit(id, status) {
 	statusBudget = status
 	idBudget = id
-	console.log(statusBudget, idBudget)
 	var myModal = new bootstrap.Modal(document.getElementById('myModalEdit'), {
 		keyboard: false,
 	})
@@ -310,7 +307,6 @@ function setSelectOption(statusActual) {
 
 	const selectOp = document.getElementById('statusSelect')
 	optionStatus.forEach((element) => {
-		console.log(element)
 		selectOp[element.value] = new Option(element.label, element.value, false, false);
 	})
 }

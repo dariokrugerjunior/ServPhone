@@ -96,7 +96,6 @@ function setBudgetsTable(budget) {
 
 function editableBudget(status) {
 	role = sessionStorage.getItem('role')
-	console.log(role)
 	if ([2, 3, 6, 7, 9, 10, 11, 12, 13].includes(status)) {
 		editable = false
 		disableEditableHtml()
@@ -269,7 +268,6 @@ function refreshProductTable() {
 }
 
 function setTableService(service) {
-	console.log('SETTABLE', service)
 	document.getElementById("table-service").innerHTML = ''
 	var newService = Object();
 	newService.id = service.id
@@ -294,7 +292,6 @@ function refreshServiceTable() {
 	Services.sort(function (a, b) {
 		return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	}).forEach((service, x) => {
-		console.log(service, 'service')
 		let rowTable =
 			`<tr> 
 			<th scope="row">${service.id}</th>
