@@ -2,6 +2,7 @@ let statusBudget;
 let idBudget;
 let employeeTec = sessionStorage.getItem('role') == 1 //Funcionario for igual Técnico 
 
+
 $(document).ready(function () {
 	$("header").load("../../pages/menu/header.html");
 	setSelectValue();
@@ -24,11 +25,13 @@ function setBudgetsTable(listBudget) {
 	listBudget.sort(function (a, b) {
 		return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
 	}).forEach(budget => {
+		console.log(budget, 'budget')
 		let rowTable =
 			`<tr> 
-			<th scope="row">${budget.id}</th>
+			<td scope="row">${budget.id}</td>
 			<td class="name">${budget.name}</td>
 			<td>${setBudgetStatus(budget.status)}</td>
+			<td>${convertDateBr(budget.update_time)}</td>
 			<td class="column-action">
 				<div class="d-flex justify-content-evenly">${setBudgetAction(budget)}</div>
 			</td>
@@ -36,6 +39,18 @@ function setBudgetsTable(listBudget) {
 		document.getElementById("table-value").innerHTML += rowTable
 	});
 }
+
+function convertDateBr(date) {
+	const dataUTC = new Date(date.replace('[UTC]', ''));
+
+	const dataLocal = new Date(dataUTC.getTime() - (dataUTC.getTimezoneOffset() * 60000));
+	const offset = -6; // offset de -6 horas para Brasília
+	const localTime = new Date(dataLocal.getTime() - (offset * 60 * 60 * 1000));
+
+	return localTime.toLocaleDateString('pt-BR') + ' ' + localTime.toLocaleTimeString('pt-BR');
+
+}
+
 
 function setSelectValue() {
 	if (sessionStorage.getItem('role') == 1) {
@@ -84,37 +99,6 @@ function setBudgetStatus(statusCode) {
 	}
 }
 
-// function setBudget2Action(budget) {
-// 	switch (budget.status) {
-// 		case 1: return sessionStorage.getItem('role') == 0 ? `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-// 			: `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-// 		case 2: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-hour-glass" onclick="updateStatus(${budget.id}, 9)"></i>`
-// 		case 3: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i> 
-// 						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
-// 		case 4: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i class="icon-hour-glass"></i> ${sessionStorage.getItem('role') == 1 ? `<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 5)"></i>` : ''}`
-// 		case 5: return `<i	 style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						${sessionStorage.getItem('role') == 1 ? `<i class="icon-pencil" style="cursor:pointer" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i> <i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>` : ''}`
-// 		case 6: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 7)"></i>`
-// 		case 7: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-// 		case 8: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 4)"></i>
-// 						<i style="cursor:pointer" class="icon-cross" data-toggle="tooltip" data-placement="top" title="Cancelar" onclick="updateStatus(${budget.id}, 6)"></i>`
-// 		case 9: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}" onclick="goToWhatsApp(${budget.phone})"></i>
-// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 3)"></i>`
-// 		case 10: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-coin-dollar" data-toggle="tooltip" data-placement="top" title="Pagamento" onclick="window.location.assign('')"></i>`
-// 		case 11: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-// 		case 12: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>`
-// 		case 13: return `<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info" onclick="window.location.assign('edit-budget.html?id=${budget.id}&status=${budget.status}')"></i>
-// 						<i style="cursor:pointer" class="icon-whatsapp" data-toggle="tooltip" data-placement="top" title="${budget.phone}"  onclick="goToWhatsApp(${budget.phone})"></i>
-// 						<i style="cursor:pointer" class="icon-checkmark" data-toggle="tooltip" data-placement="top" title="Confirmar" onclick="updateStatus(${budget.id}, 10)"></i>`
-// 	}
-// }
 
 function setBudgetAction(budget) {
 	let activeIcon = false
@@ -306,12 +290,6 @@ function editStatusConfirm() {
 		}
 	}
 
-
-
-
-
-
-
 	document.location.reload(true);
 
 }
@@ -335,6 +313,56 @@ function setSelectOption(statusActual) {
 		console.log(element)
 		selectOp[element.value] = new Option(element.label, element.value, false, false);
 	})
-
 }
 
+function exportTable() {
+	exportarCSV(3, '#table thead th', '#table tbody tr', 'orcamento-dados')
+}
+
+function exportarCSV(countCell, selectorColumns, selectorBody, nameCsv) {
+	// Seleciona a primeira linha da tabela para obter os cabeçalhos das colunas
+	const headers = Array.from(document.querySelectorAll(selectorColumns)).map((header, index) => {
+		if (index <= countCell) {
+			return header.innerText
+		}else{
+			return ''
+		}
+	});
+
+	// Seleciona todas as outras linhas da tabela e armazena em um array
+	const rows = Array.from(document.querySelectorAll(selectorBody));
+
+	// Cria uma matriz vazia para armazenar os dados
+	const data = [];
+
+	// Percorre as linhas da tabela e adiciona cada dado a um objeto
+	rows.forEach(row => {
+		const rowData = {};
+
+		// Percorre as células da linha e adiciona cada dado ao objeto
+		Array.from(row.querySelectorAll('td')).forEach((cell, index) => {
+			if (index <= countCell) {
+				rowData[headers[index]] = cell.innerText;
+			}
+		});
+
+		// Adiciona o objeto de dados à matriz
+		data.push(rowData);
+	});
+
+	// Converte a matriz de objetos em um arquivo CSV usando a biblioteca Papaparse
+	const csv = Papa.unparse(data, {
+		delimiter: ";",
+		encoding: "utf-8"
+	});
+
+	// Cria um link de download para o arquivo CSV
+	const link = document.createElement('a');
+	link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+	link.setAttribute('download', `${nameCsv}.csv`);
+	link.style.display = 'none';
+	document.body.appendChild(link);
+
+	// Dispara o evento de download do arquivo CSV
+	link.click();
+}

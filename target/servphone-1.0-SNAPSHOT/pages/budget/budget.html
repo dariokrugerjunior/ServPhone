@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script src="../../js/budget/budget.js"></script>
 </head>
 
@@ -31,120 +33,123 @@
                             <img src="../../imgs/add-budget.svg" width="30" height="30">
                         </button>
                     </a>
-                    <a href="">
+                    <a onclick="exportTable()">
                         <button class="navbar-toggler custom-toggler" type="button">
-                            <img src="../../imgs/export-pdf.svg	" width="30" height="30">
+                            <img src="../../imgs/csv.svg" width="30" height="30">
                         </button>
                     </a>
                 </div>
                 <div class="filter">
                     <div class="input-group mb-3 button-input">
-                        <input type="text" id="search-client" class="form-control" placeholder="Cliente" aria-label="Cliente" onkeyup="searchClient()">
+                        <input type="text" id="search-client" class="form-control" placeholder="Cliente"
+                            aria-label="Cliente" onkeyup="searchClient()">
                     </div>
-                    <div  class="input-group mb-3 filter-select">
+                    <div class="input-group mb-3 filter-select">
                         <select id="select-status" class="form-select" onchange='changeAction(this.value)'>
                         </select>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered border-dark">
+            <table id="table" class="table table-bordered border-dark">
                 <thead>
                     <tr>
                         <th scope="col">Cod</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Data Ultima Atualização</th>
                         <th scope="col">Ação</th>
                     </tr>
                 </thead>
                 <tbody id="table-value" class="table-group-divider">
-                    
+
                 </tbody>
             </table>
-        </div>
-    </section>
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="body-content"></p>
-                </div>
-                <div class="modal-footer">
-                    <a href="budget.html">
-                        <button type="button" class="btn btn-primary">
-                            Voltar
-                        </button>   
-                    </a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
+</body>
+</div>
+</section>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="body-content"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="budget.html">
+                    <button type="button" class="btn btn-primary">
+                        Voltar
+                    </button>
+                </a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModalEdit" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalEditLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="edit-body-content"></p>
-                </div>
-                <div class="modal-footer">
-                    <a>
-                        <button type="button" class="btn btn-primary" onclick="editStatusConfirm()">
-                            Salvar
-                        </button>   
-                    </a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                </div>
+</div>
+<div class="modal fade" id="myModalEdit" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalEditLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="edit-body-content"></p>
+            </div>
+            <div class="modal-footer">
+                <a>
+                    <button type="button" class="btn btn-primary" onclick="editStatusConfirm()">
+                        Salvar
+                    </button>
+                </a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
-    <footer></footer>
+</div>
+<footer></footer>
 </body>
 
 </html>
 
 <style>
     .table-view {
-		padding-top: 60px;
-	}
+        padding-top: 60px;
+    }
 
-	.sub-menu {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		padding-bottom: 1rem;
-	}
+    .sub-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+    }
 
     .filter {
         display: flex;
     }
 
     .button-menu {
-		padding-bottom: 10px;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-	}
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-    .button-input{
+    .button-input {
         padding-right: 2rem;
     }
 
-	@media only screen and (max-width: 600px) {
-		.sub-menu {
-			display: flex;
-    		flex-direction: column;
-    		justify-content: space-between;
-    		align-items: stretch;
-		}
+    @media only screen and (max-width: 600px) {
+        .sub-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+        }
 
         .filter {
             display: block;

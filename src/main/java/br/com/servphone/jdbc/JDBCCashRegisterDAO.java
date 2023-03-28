@@ -47,7 +47,7 @@ public class JDBCCashRegisterDAO implements CashRegisterDAO {
             String query = String.format("SELECT * FROM tb_cash_register tcr where tcr.budget_id = %s", id);
             ResultSet rs = stmt.executeQuery(query);
             if (rs.next()) {
-                cashRegister =addValueCashRegister(rs);
+                cashRegister = addValueCashRegister(rs);
             }
         } catch (Exception ex){
             ex.printStackTrace();
@@ -61,7 +61,7 @@ public class JDBCCashRegisterDAO implements CashRegisterDAO {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM tb_cash_register");
-            if (rs.next()) {
+            while (rs.next()) {
                 cashRegisterList.add(addValueCashRegister(rs));
             }
 
@@ -69,6 +69,22 @@ public class JDBCCashRegisterDAO implements CashRegisterDAO {
             ex.printStackTrace();
         }
         return cashRegisterList;
+    }
+
+    @Override
+    public CashRegister getById(int id) {
+        CashRegister cashRegister = new CashRegister();
+        try {
+            Statement stmt = connection.createStatement();
+            String query = String.format("SELECT * FROM tb_cash_register WHERE id=%s", id);
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                cashRegister = addValueCashRegister(rs);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cashRegister;
     }
 
     private CashRegister addValueCashRegister(ResultSet rs){

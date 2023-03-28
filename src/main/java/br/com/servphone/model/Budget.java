@@ -1,5 +1,7 @@
 package br.com.servphone.model;
 
+import java.sql.Timestamp;
+
 public class Budget {
     private int id;
     private int status;
@@ -7,6 +9,8 @@ public class Budget {
     private String brand;
     private String model;
     private String description;
+    private Timestamp create_time;
+    private Timestamp update_time;
     private String password_product;
     private int client_id;
     private int employee_id;
@@ -95,4 +99,20 @@ public class Budget {
 
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public Timestamp getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Timestamp create_time) {
+        this.create_time = create_time;
+    }
+
+    public Timestamp getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Timestamp update_time) {
+        this.update_time = update_time;
+    }
 }

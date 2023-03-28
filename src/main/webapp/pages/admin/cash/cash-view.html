@@ -9,9 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caixa Detalhes</title>
     <link rel="stylesheet" type="text/css" href="">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/admin/cash/cash-view.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../icomoon/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="">
+    <script src="../../../js/admin/cash/cash-view.js"></script>
 </head>
 
 <body>
@@ -20,7 +26,11 @@
     <section>
         <div style="padding-top: 60px;">
             <div class="form-view">
-                <h1 style="padding-bottom: 50px;">Caixa Detalhes</h1>
+                <div class="title-view">
+                    <h1>Caixa Detalhes</h1>
+                    <i style="cursor:pointer; font-size: 2.2rem;" data-toggle="tooltip" data-placement="top" title="Informações" class="icon-info"
+                        onclick="goToBudget()"></i>
+                </div>
                 <form id="form">
                     <div class="form-group row btn-input">
                         <label for="inputCodBudget" class="col-sm-2 col-form-label">Codigo Orçamento</label>
@@ -32,6 +42,12 @@
                         <label for="inputDiscount" class="col-sm-2 col-form-label">Desconto</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputDiscount" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row btn-input">
+                        <label for="inputFormPayment" class="col-sm-2 col-form-label">Forma de Pagamento</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputFormPayment" disabled>
                         </div>
                     </div>
                     <div class="form-group row btn-input">
@@ -53,7 +69,7 @@
                         </div>
                     </div>
                     <div class="button-option">
-                        <a href="/pages/admin/cash/cash.html">
+                        <a href="cash.html">
                             <button type='button' class="btn btn-danger">Voltar</button>
                         </a>
                     </div>
@@ -61,7 +77,27 @@
             </div>
         </div>
     </section>
-    <footer></footer>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="body-content"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="cash.html">
+                        <button type="button" class="btn btn-primary">
+                            Voltar para tela de Pagamentos
+                        </button>
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
 </body>
 
 </html>
@@ -96,6 +132,14 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+    }
+
+    .title-view {
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
 

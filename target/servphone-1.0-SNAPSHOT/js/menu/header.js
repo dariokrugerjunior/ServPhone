@@ -4,7 +4,6 @@ $(document).ready(function () {
     //admin = 0
     //tech = 1
     let contentButton = `<a href="/servphone_war_exploded/pages/budget/budget.html" type="button" class="btn btn-outline-primary" >Orçamentos</a>
-        <a href="" type="button" class="btn btn-outline-primary" >Relatorios</a>
         <a href="/servphone_war_exploded/pages/product/product.html" type="button" class="btn btn-outline-primary" >Produtos</a>
         <a href="/servphone_war_exploded/pages/services/services.html" type="button" class="btn btn-outline-primary" >Serviços</a>`;
     if (role == 0) {

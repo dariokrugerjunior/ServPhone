@@ -172,7 +172,7 @@ public class JDBCBudgetDAO implements BudgetDAO {
         Budget budget = new Budget();
         try{
             budget.setId(rs.getInt("id"))   ;
-            budget.setStatus(rs.getInt("status"));
+            budget.setStatus(rs.getInt("status"));  
             budget.setDefect(rs.getString("defect"));
             budget.setBrand(rs.getString("brand"));
             budget.setModel(rs.getString("model"));
@@ -182,6 +182,8 @@ public class JDBCBudgetDAO implements BudgetDAO {
             budget.setEmployee_id(rs.getInt("employee_id"));
             budget.setName(rs.getString("name"));
             budget.setPhone(rs.getString("phone"));
+            budget.setUpdate_time(rs.getTimestamp("update_time"));
+            budget.setCreate_time(rs.getTimestamp("create_time"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

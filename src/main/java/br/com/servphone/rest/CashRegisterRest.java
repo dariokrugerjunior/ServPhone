@@ -69,4 +69,22 @@ public class CashRegisterRest extends UtilRest {
         return cashRegisterList;
     }
 
+    @GET
+    @Path("/get-by-id")
+    @Consumes("application/*")
+    @Produces({MediaType.APPLICATION_JSON})
+    public CashRegister getCashById(@QueryParam("id") int id) {
+        CashRegister cashRegister = new CashRegister();
+        try{
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCCashRegisterDAO jdbcCashRegisterDAO = new JDBCCashRegisterDAO(connection);
+            cashRegister = jdbcCashRegisterDAO.getById(id);
+            connectionDB.closeConnection();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return cashRegister;
+    }
+
 }

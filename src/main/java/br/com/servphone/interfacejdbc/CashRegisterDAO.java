@@ -9,4 +9,7 @@ public interface CashRegisterDAO {
     CashRegister getByBudgetId(int id);
 
     List<CashRegister> getAll();
+
+    CashRegister getById(int id);
 }
+    
