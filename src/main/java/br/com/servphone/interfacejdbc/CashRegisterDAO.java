@@ -12,4 +12,3 @@ public interface CashRegisterDAO {
 
     CashRegister getById(int id);
 }
-    

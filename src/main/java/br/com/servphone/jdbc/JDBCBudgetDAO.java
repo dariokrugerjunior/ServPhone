@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class JDBCBudgetDAO implements BudgetDAO {
@@ -123,6 +125,25 @@ public class JDBCBudgetDAO implements BudgetDAO {
         return 0;
     }
 
+    @Override
+    public int countStatus(int status, String time) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM tb_budget tb  WHERE status = ? AND DATE(update_time) = ?");
+            stmt.setInt(1, status);
+            stmt.setString(2, dateFormat(time));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count;
+            } else {
+                return 0;
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
     private int updateBudget(BudgetEdit budgetEdit){
         try{
             PreparedStatement stmt = connection.prepareStatement("UPDATE tb_budget set status =  ?, defect = ?, description = ? where id = ?");
@@ -188,6 +209,14 @@ public class JDBCBudgetDAO implements BudgetDAO {
             ex.printStackTrace();
         }
         return budget;
+    }
+
+    private String dateFormat(String time) {
+        Date date = new Date();
+        date.setTime(Long.parseLong(time));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(date);
+        return formattedDate;
     }
 
 

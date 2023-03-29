@@ -10,7 +10,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Path("/budget")
@@ -115,6 +117,21 @@ public class BudgetRest extends UtilRest{
             Connection connection = connectionDB.openConnection();
             JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
             return jdbcBudgetDAO.update(budgetEdit);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    @GET
+    @Path("/count")
+    @Consumes("application/*")
+    public int countStatus(@QueryParam("status") int status, @QueryParam("time") String time) {
+        try {
+            ConnectionDB connectionDB = new ConnectionDB();
+            Connection connection = connectionDB.openConnection();
+            JDBCBudgetDAO jdbcBudgetDAO = new JDBCBudgetDAO(connection);
+            return jdbcBudgetDAO.countStatus(status, time);
         }catch (Exception ex) {
             ex.printStackTrace();
         }

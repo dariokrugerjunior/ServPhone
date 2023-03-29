@@ -12,6 +12,6 @@ public interface BudgetDAO {
     int updateStatus(int id, int status);
     Budget getById(int id);
     List<Budget> getByStatus(int status);
-
     int update(BudgetEdit budgetEdit);
+    int countStatus(int status, String time);
 }
