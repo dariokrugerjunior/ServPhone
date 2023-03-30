@@ -5,7 +5,6 @@ import br.com.servphone.model.Budget;
 import br.com.servphone.model.BudgetEdit;
 import br.com.servphone.model.Product;
 import br.com.servphone.model.Service;
-import org.apache.cxf.Bus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
