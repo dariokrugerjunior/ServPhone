@@ -1,6 +1,7 @@
 let statusBudget;
 let idBudget;
 let employeeTec = sessionStorage.getItem('role') == 1 //Funcionario for igual Técnico 
+let filter = ''
 
 
 $(document).ready(function () {
@@ -204,7 +205,7 @@ function getByStatus(status) {
 }
 
 function searchClient() {
-	var input, filter, ul, li, a, i, txtValue;
+	var input, ul, li, a, i, txtValue;
 	input = document.getElementById('search-client');
 	filter = input.value.toUpperCase();
 	ul = document.getElementById("table-value");
@@ -316,6 +317,7 @@ function exportTable() {
 }
 
 function exportarCSV(countCell, selectorColumns, selectorBody, nameCsv) {
+	console.log(filter)
 	// Seleciona a primeira linha da tabela para obter os cabeçalhos das colunas
 	const headers = Array.from(document.querySelectorAll(selectorColumns)).map((header, index) => {
 		if (index <= countCell) {
@@ -333,17 +335,19 @@ function exportarCSV(countCell, selectorColumns, selectorBody, nameCsv) {
 
 	// Percorre as linhas da tabela e adiciona cada dado a um objeto
 	rows.forEach(row => {
-		const rowData = {};
-
-		// Percorre as células da linha e adiciona cada dado ao objeto
-		Array.from(row.querySelectorAll('td')).forEach((cell, index) => {
-			if (index <= countCell) {
-				rowData[headers[index]] = cell.innerText;
-			}
-		});
-
-		// Adiciona o objeto de dados à matriz
-		data.push(rowData);
+		if (row.style.cssText !== 'display: none;') {
+			const rowData = {};
+			console.log()
+			// Percorre as células da linha e adiciona cada dado ao objeto
+			Array.from(row.querySelectorAll('td')).forEach((cell, index) => {
+				if (index <= countCell) {
+					rowData[headers[index]] = cell.innerText;
+				}
+			});
+	
+			// Adiciona o objeto de dados à matriz
+			data.push(rowData);
+		}
 	});
 
 	// Converte a matriz de objetos em um arquivo CSV usando a biblioteca Papaparse
@@ -351,10 +355,9 @@ function exportarCSV(countCell, selectorColumns, selectorBody, nameCsv) {
 		delimiter: ";",
 		encoding: "utf-8"
 	});
-
 	// Cria um link de download para o arquivo CSV
 	const link = document.createElement('a');
-	link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+	link.setAttribute('href', 'data:text/csv;charset=utf-8,' + csv);
 	link.setAttribute('download', `${nameCsv}.csv`);
 	link.style.display = 'none';
 	document.body.appendChild(link);

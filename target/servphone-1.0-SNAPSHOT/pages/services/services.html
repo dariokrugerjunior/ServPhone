@@ -34,7 +34,10 @@
 						</button>
 					</a>
 				</div>
-				<input type="text" id="myInput" placeholder="Pesquisa por nomes">
+				<div class="input-group mb-3 button-input search">
+					<input type="text" id="search-service" class="form-control" placeholder="Serviço"
+						aria-label="Serviço" onkeyup="searchService()">
+				</div>
 			</div>
 			<table class="table table-bordered border-dark">
 				<thead>
@@ -68,12 +71,20 @@
 		align-items: center;
 	}
 
+	.search {
+		width: 18rem;
+	}
+
 	@media only screen and (max-width: 600px) {
 		.sub-menu {
 			display: flex;
 			flex-direction: column;
 			align-items: stretch;
 			padding-bottom: 1rem;
+		}
+
+		.search {
+			width: 23rem;
 		}
 	}
 

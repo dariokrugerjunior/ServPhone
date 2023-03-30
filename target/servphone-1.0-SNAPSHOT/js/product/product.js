@@ -18,7 +18,7 @@ function setProductTable(listProduct) {
 		let rowTable = 
 		`<tr> 
 			<th scope="row">${product.id}</th>
-			<td>${product.name}</td>
+			<td class="name">${product.name}</td>
 			<td>${product.valueSale.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</td>
 			<td>${product.status == 0 ? 'Desativado' : 'Ativado' }</td>
 			<td>
@@ -31,4 +31,21 @@ function setProductTable(listProduct) {
 		</tr>`
 		document.getElementById("table-value").innerHTML += rowTable
 	});
+}
+
+function searchProduct() {
+	var input, ul, filter, li, a, i, txtValue;
+	input = document.getElementById('search-product');
+	filter = input.value.toUpperCase();
+	ul = document.getElementById("table-value");
+	li = ul.getElementsByTagName('tr');
+	for (i = 0; i < li.length; i++) {
+		a = li[i].getElementsByClassName("name")[0];
+		txtValue = a.textContent || a.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			li[i].style.display = "";
+		} else {
+			li[i].style.display = "none";
+		}
+	}
 }

@@ -33,7 +33,10 @@
 						</button>
 					</a>
 				</div>
-				<input type="text" id="myInput" placeholder="Pesquisa por nomes">
+				<div class="input-group mb-3 button-input search">
+					<input type="text" id="search-employee" class="form-control" placeholder="Funcionario"
+						aria-label="Funcionario" onkeyup="searchEmployee()">
+				</div>
 			</div>
 			<table class="table table-bordered border-dark">
 				<thead>
@@ -67,12 +70,20 @@
 		padding-bottom: 1rem;
 	}
 
+	.search {
+		width: 18rem;
+	}
+
 	@media only screen and (max-width: 600px) {
 		.sub-menu {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: stretch;
+		}
+		
+		.search {
+			width: 23rem;
 		}
 	}
 

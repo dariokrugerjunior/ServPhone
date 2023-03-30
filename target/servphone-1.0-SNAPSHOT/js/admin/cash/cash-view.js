@@ -19,9 +19,10 @@ function getCashById() {
 
 function setValueCash(cash) {
 	document.getElementById("inputCodBudget").value = cash.budget_id
-	document.getElementById("inputDiscount").value = cash.discount
-	document.getElementById("inputValue").value = cash.value_total
-	document.getElementById('inputValueTotal').value = cash.value_total - cash.discount
+	document.getElementById("inputDiscount").value = cash.discount.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+	document.getElementById("inputValue").value = cash.value_total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+	const valueTotal =  cash.value_total - cash.discount
+	document.getElementById('inputValueTotal').value = valueTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
 	document.getElementById('inputDate').value = convertDateBr(cash.create_time)
 	document.getElementById('inputFormPayment').value = getNameFormPayment(cash.form_payment)
 	cashBudgetId = cash.budget_id

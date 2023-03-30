@@ -18,7 +18,7 @@ function setEmployeeTable(listEmployee) {
 		let rowTable = 
 		`<tr> 
 			<th scope="row">${employee.id}</th>
-			<td>${employee.name}</td>
+			<td class="name">${employee.name}</td>
 			<td>${employee.role === 0 ? 'Administração' : 'Tecnico'}</td>
 			<td>${employee.status === 0 ? 'Desativado' : 'Ativado'}</td>
 			<td>
@@ -31,4 +31,21 @@ function setEmployeeTable(listEmployee) {
 		</tr>`
 		document.getElementById("table-value").innerHTML += rowTable
 	});
+}
+
+function searchEmployee() {
+	var input, ul, filter, li, a, i, txtValue;
+	input = document.getElementById('search-employee');
+	filter = input.value.toUpperCase();
+	ul = document.getElementById("table-value");
+	li = ul.getElementsByTagName('tr');
+	for (i = 0; i < li.length; i++) {
+		a = li[i].getElementsByClassName("name")[0];
+		txtValue = a.textContent || a.innerText;
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			li[i].style.display = "";
+		} else {
+			li[i].style.display = "none";
+		}
+	}
 }
