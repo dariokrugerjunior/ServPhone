@@ -15,6 +15,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script src="../../js/budget/edit-budget.js"></script>
 </head>
 
@@ -23,13 +25,17 @@
     </header>
     <section class="container">
         <div style="padding-top: 60px;">
-            <div class="form-view">
+            <div id="myDiv" class="form-view">
                 <div class="title">
                     <h1 id="title"></h1>
                     <div class="options">
-                        <div class="div-icon">
-                            <i class="icon-whatsapp" data-toggle="tooltip" data-placement="top"
+                        <div id="whatsapp" class="div-icon">
+                            <i class="icon icon-whatsapp" data-toggle="tooltip" data-placement="top"
                                 onclick="goToWhatsApp()"></i>
+                        </div>
+                        <div id="genpdf" class="div-icon">
+                            <i class="icon icon-file-pdf" data-toggle="tooltip" data-placement="top"
+                                onclick="generatePdf()"></i>
                         </div>
                         <div class="form-floating">
                             <h6 id="statusSelect"></h6>
@@ -76,7 +82,7 @@
                         </div>
                     </div>
                     <div class="add-value">
-                        <p id="teste">
+                        <p id="buttons-add">
                             <a id="add-product" class="btn btn-primary button-add" data-bs-toggle="collapse"
                                 href="#addProductCard" role="button" onclick="openModalAdd('product')">
                                 Adicionar Produtos
@@ -105,7 +111,8 @@
 
                             <div class="w-auto p-3">
                                 <label for="buttonAction" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="buttonAction" onclick="confirmAddValues('product')">
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction"
+                                    onclick="confirmAddValues('product')">
                                     Adicionar
                                 </a>
                             </div>
@@ -127,7 +134,8 @@
 
                             <div class="w-auto p-3">
                                 <label for="buttonAction" class="form-label">Ação</label>
-                                <a class="btn btn-primary form-control" role="button" id="buttonAction" onclick="confirmAddValues('service')">
+                                <a class="btn btn-primary form-control" role="button" id="buttonAction"
+                                    onclick="confirmAddValues('service')">
                                     Adicionar
                                 </a>
                             </div>
@@ -168,8 +176,9 @@
                         </table>
                     </div>
 
-                    <div class="button-option">
-                        <button :disabled="!editable" type="button" onclick="updateBudget()" class="btn btn-primary">Salvar</button>
+                    <div id="buttons-actions" class="button-option">
+                        <button :disabled="!editable" type="button" onclick="updateBudget()"
+                            class="btn btn-primary">Salvar</button>
                         <a href="budget.html">
                             <button type='button' class="btn btn-danger">Cancelar</button>
                         </a>
@@ -192,7 +201,7 @@
                     <a href="budget.html">
                         <button type="button" class="btn btn-primary">
                             Voltar para tela de Orçamentos
-                        </button>   
+                        </button>
                     </a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
@@ -215,8 +224,9 @@
         align-items: center;
     }
 
-    .icon-whatsapp {
+    .icon {
         font-size: 2rem;
+        cursor: pointer;
     }
 
 

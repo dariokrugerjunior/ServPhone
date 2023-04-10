@@ -80,6 +80,7 @@ function setBudgetsTable(budget) {
 	Budget.defect = budget.defect
 	Budget.description = budget.description
 	Budget.status = budget.status
+	Budget.phone = budget.phone
 
 	editableBudget(budget.status)
 
@@ -95,6 +96,7 @@ function setBudgetsTable(budget) {
 }
 
 function editableBudget(status) {
+	document.getElementById("genpdf").style.visibility = "hidden"
 	role = sessionStorage.getItem('role')
 	if ([2, 3, 6, 7, 9, 10, 11, 12, 13].includes(status)) {
 		editable = false
@@ -108,8 +110,10 @@ function editableBudget(status) {
 function disableEditableHtml() {
 	document.getElementById("inputDefect").disabled = true
 	document.getElementById("inputDescription").disabled = true
-	document.getElementById("teste").style.visibility = "hidden"
+	document.getElementById("buttons-add").style.visibility = "hidden"
 	document.getElementById("add-service").style.visibility = "hidden"
+	document.getElementById('buttons-actions').style.visibility = 'hidden'
+	document.getElementById("genpdf").style.visibility = ''
 }
 
 
@@ -132,7 +136,7 @@ function setBudgetStatus(statusCode) {
 }
 
 function goToWhatsApp() {
-	window.location = `https://api.whatsapp.com/send?phone=${phone}`
+	window.location = `https://api.whatsapp.com/send?phone=${Budget.phone}`
 }
 
 function openModalAdd(type) {
@@ -327,7 +331,7 @@ function updateBudget() {
 		var budget = new Object();
 		budget.id = new URLSearchParams(window.location.search).get('id')
 		if (Budget.status == 5) {
-			budget.status = 9	
+			budget.status = 9
 		} else {
 			budget.status = document.getElementById('statusSelect').value
 		}
@@ -346,7 +350,7 @@ function validateInputsBudget() {
 		actionModal("Aviso!", "Você não pode editar esse orçamento no momento")
 		return false
 	}
-	
+
 	if (document.getElementById("inputDefect").value === '') {
 		actionModal("Aviso!", "Não é possivel atualizar o Orçamento com o campo DEFEITO vazio")
 		return false
@@ -422,4 +426,26 @@ function getServiceByBudgetId(id) {
 	})
 }
 
+
+function generatePdf() {
+  // Pega a div com o ID "myDiv"
+  document.getElementById("genpdf").style.visibility = "hidden"
+  document.getElementById('whatsapp').style.visibility = 'hidden'
+  var div = document.getElementById("myDiv");
+
+  // Cria um objeto jsPDF
+  var pdf = new jsPDF("p", "mm", "a4");
+
+  // Converte a div em uma imagem em formato PNG usando a biblioteca html2canvas
+  html2canvas(div).then(function(canvas) {
+    // Adiciona a imagem ao PDF com a largura e altura da página
+    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, 210, 297);
+
+    // Salva o arquivo PDF no disco
+    pdf.save(`${Budget.id}-orçamento.pdf`);
+  });
+  document.getElementById("genpdf").style.visibility = ''
+  document.getElementById('whatsapp').style.visibility = ''
+
+}
 
