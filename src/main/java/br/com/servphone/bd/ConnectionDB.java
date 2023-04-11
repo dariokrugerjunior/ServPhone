@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 public class ConnectionDB {
     private Connection connection;
     private static final String User = "root";
-    private static final String Password = "root";
+    private static final String Password = "";
     private static final String Url = "jdbc:mysql://127.0.0.1:3306/servphone?&userTimezone=true&serverTimezone=UTC";
     private static final String Driver = "com.mysql.cj.jdbc.Driver";
 
