@@ -1,14 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="servphone:war exploded">
+  <artifact type="war" name="servphone:war exploded">
     <output-path>$PROJECT_DIR$/target/servphone-1.0-SNAPSHOT</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>servphone</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
-    <root id="root">
+    <root id="archive" name="servphone_war exploded.war">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="servphone" />
