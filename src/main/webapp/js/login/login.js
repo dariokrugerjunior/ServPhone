@@ -3,7 +3,7 @@ validateLogin = function () {
     var password = document.getElementById("inputPassword").value;
     $.ajax({
         type: "POST",
-        url: "/servphone_war_exploded/servphone/security/auth",
+        url: "security/auth",
         data: {login: login, password: password},
     }).then((response) => {
         if(response.toString().includes('ok')){
